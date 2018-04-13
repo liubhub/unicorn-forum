@@ -3,4 +3,5 @@ share/*
 lib/*
 include/*
 bin/*
+forum/forum/__pycache__/*
 *.pyc
