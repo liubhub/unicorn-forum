@@ -5,15 +5,13 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
-    # id = models.BigIntegerField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    # username1 = models.TextField(max_length=30, null=False, unique=True)
-    bio = models.TextField(max_length=200, blank=True, null=True)
+    bio = models.CharField(max_length=200, blank=True, null=True)
     birth_date = models.DateField(null=True, blank=True)
-    city = models.TextField(max_length=25, null=True, blank=False)
-    country = models.TextField(max_length=25, null=True, blank=False)
-    avatar = models.TextField(max_length=25,null=True, blank=False)# TODO: FileField # link to the avatar image at the special folder
-    updated_at = models.DateTimeField(auto_now=True) # last modified his profile
+    city = models.CharField(max_length=25, null=True, blank=False)
+    country = models.CharField(max_length=25, null=True, blank=False)
+    avatar = models.FileField(upload_to="avatars/", null=True, blank=True)  # MEDIA_ROOT/avatars
+    updated_at = models.DateTimeField(auto_now=True)  # last modified his profile
     confirmed = models.BooleanField(null=False, blank=False)
 
     class Meta():
@@ -21,14 +19,113 @@ class Profile(models.Model):
 
     def is_user_confirmed(self):
         return self.confirmed
+
+class Category(models.Model):
+    name = models.TextField(max_length=300, unique=True,null=False,blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta():
+        db_table = 'category'
+
+    def __str__(self):
+        return self.name
+
+class Message(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    message_text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    creator_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta():
+        db_table = "message"
+
+    def __str__(self):
+        return self.id
+
+class MessageRecipient(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    message_id = models.ForeignKey(Message, on_delete=models.CASCADE)
+    read_status = models.BooleanField()
+    message_recipient_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta():
+        db_table = "message_recipient"
     
-    # def __str__(self):
-    #     return self.username
+    def __str__(self):
+        return self.id
+
+class Entity(models.Model):
+    id = models.BigAutoField(primary_key=True)
+
+    class Meta():
+        db_table = "entity"
     
+    def __str__(self):
+        return self.id
+
+class Avatar(models.Model):
+    entity_id = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta():
+        db_table = "avatar"
+    
+    def __str__(self):
+        return self.entity_id
+
+
+class ThreadTheme(models.Model):
+    entity_id = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
+    category_id = models.ForeignKey(Category, on_delete=models.deletion.SET_NULL)
+    subject = models.CharField(max_length = 75, null=False, blank=False)
+    content = models.TextField()
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta():
+        db_table = "thread_theme"
+    
+    def __str__(self):
+        return str(self.entity_id) + ", " + str(self.subject)
+
+class Comment(models.Model):
+    entity_id = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
+    thread_id = models.ForeignKey(ThreadTheme, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
+
+    class Meta():
+        db_table = "comment"
+    
+    def __str__(self):
+        return self.entity_id
+
+class CommentMeta(models.Model):
+    comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="main_comment_ref")
+    creator_id = models.ForeignKey(User, on_delete=models.deletion.SET_NULL. related_name="creator_of_comment")
+    answer_to_id = models.ForeignKey(User, on_delete=models.deletion.SET_NULL, related_name="answer_to_comment")
+    answer_to_comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="answered_to_comment_ref")
+
+    class Meta():
+        db_table = "comment_meta_info"
+    
+    def __str__(self):
+        return "Creator id: " + str(self.comment_id)
+
+class LikedEntity(models.Model):
+    entity_id = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+
+    class Meta():
+        db_table = "liked_entity"
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
