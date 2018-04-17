@@ -21,14 +21,15 @@ class Profile(models.Model):
         return self.confirmed
 
 class Category(models.Model):
-    name = models.TextField(max_length=300, unique=True,null=False,blank=False)
+    id = models.BigAutoField(primary_key=True)
+    category_name = models.CharField(max_length=255, unique=True, null=False,blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta():
         db_table = 'category'
 
     def __str__(self):
-        return self.name
+        return self.category_name
 
 class Message(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -76,7 +77,7 @@ class Avatar(models.Model):
 
 class ThreadTheme(models.Model):
     entity_id = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
-    category_id = models.ForeignKey(Category, on_delete=models.deletion.SET_NULL)
+    category_id = models.ForeignKey(Category, on_delete=models.deletion.SET_NULL, null=True)
     subject = models.CharField(max_length = 75, null=False, blank=False)
     content = models.TextField()
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -91,7 +92,6 @@ class ThreadTheme(models.Model):
 
 class Comment(models.Model):
     entity_id = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
-    thread_id = models.ForeignKey(ThreadTheme, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
@@ -104,9 +104,10 @@ class Comment(models.Model):
 
 class CommentMeta(models.Model):
     comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="main_comment_ref")
-    creator_id = models.ForeignKey(User, on_delete=models.deletion.SET_NULL. related_name="creator_of_comment")
-    answer_to_id = models.ForeignKey(User, on_delete=models.deletion.SET_NULL, related_name="answer_to_comment")
+    creator_id = models.ForeignKey(User, on_delete=models.deletion.SET_NULL, related_name="creator_of_comment", null=True)
+    answer_to_id = models.ForeignKey(User, on_delete=models.deletion.SET_NULL, related_name="answer_to_comment", null=True)
     answer_to_comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="answered_to_comment_ref")
+    thread_id = models.ForeignKey(ThreadTheme, on_delete=models.CASCADE)
 
     class Meta():
         db_table = "comment_meta_info"
@@ -115,8 +116,9 @@ class CommentMeta(models.Model):
         return "Creator id: " + str(self.comment_id)
 
 class LikedEntity(models.Model):
-    entity_id = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
-    user_id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    id = models.BigAutoField(primary_key=True)
+    entity_id = models.OneToOneField(Entity, on_delete=models.CASCADE)
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
 
     class Meta():
         db_table = "liked_entity"
