@@ -24,5 +24,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('frontend.urls')),
-    path('categories/', include('frontend.urls'))
+    path('', include('app.urls'))
 ]
