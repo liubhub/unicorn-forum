@@ -106,7 +106,7 @@ class CommentMeta(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="main_comment_ref")
     creator = models.ForeignKey(User, on_delete=models.deletion.SET_NULL, related_name="creator_of_comment", null=True)
     answer_to = models.ForeignKey(User, on_delete=models.deletion.SET_NULL, related_name="answer_to_comment", null=True)
-    answer_to_comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="answered_to_comment_ref")
+    answer_to_comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="answered_to_comment_ref",null=True)
     thread = models.ForeignKey(ThreadTheme, on_delete=models.CASCADE)
 
     class Meta():
