@@ -12,7 +12,7 @@ class Profile(models.Model):
     country = models.CharField(max_length=25, null=True, blank=False)
     avatar = models.FileField(upload_to="avatars/", null=True, blank=True)  # MEDIA_ROOT/avatars
     updated_at = models.DateTimeField(auto_now=True)  # last modified his profile
-    confirmed = models.BooleanField(null=False, blank=False)
+    confirmed = models.BooleanField(null=False, blank=False, default=0)
 
     class Meta():
         db_table = 'user_profile'
@@ -35,7 +35,7 @@ class Message(models.Model):
     id = models.BigAutoField(primary_key=True)
     message_text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    creator_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta():
         db_table = "message"
@@ -45,9 +45,9 @@ class Message(models.Model):
 
 class MessageRecipient(models.Model):
     id = models.BigAutoField(primary_key=True)
-    message_id = models.ForeignKey(Message, on_delete=models.CASCADE)
+    message = models.ForeignKey(Message, on_delete=models.CASCADE)
     read_status = models.BooleanField()
-    message_recipient_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    message_recipient = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta():
         db_table = "message_recipient"
@@ -65,22 +65,22 @@ class Entity(models.Model):
         return self.id
 
 class Avatar(models.Model):
-    entity_id = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    entity = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta():
         db_table = "avatar"
     
     def __str__(self):
-        return self.entity_id
+        return self.entity
 
 
 class ThreadTheme(models.Model):
-    entity_id = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
-    category_id = models.ForeignKey(Category, on_delete=models.deletion.SET_NULL, null=True)
+    entity = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
+    category = models.ForeignKey(Category, on_delete=models.deletion.SET_NULL, null=True)
     subject = models.CharField(max_length = 75, null=False, blank=False)
     content = models.TextField()
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -88,10 +88,10 @@ class ThreadTheme(models.Model):
         db_table = "thread_theme"
     
     def __str__(self):
-        return str(self.entity_id) + ", " + str(self.subject)
+        return str(self.entity) + ", " + str(self.subject)
 
 class Comment(models.Model):
-    entity_id = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
+    entity = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
@@ -100,25 +100,25 @@ class Comment(models.Model):
         db_table = "comment"
     
     def __str__(self):
-        return self.entity_id
+        return self.entity
 
 class CommentMeta(models.Model):
-    comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="main_comment_ref")
-    creator_id = models.ForeignKey(User, on_delete=models.deletion.SET_NULL, related_name="creator_of_comment", null=True)
-    answer_to_id = models.ForeignKey(User, on_delete=models.deletion.SET_NULL, related_name="answer_to_comment", null=True)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="main_comment_ref")
+    creator = models.ForeignKey(User, on_delete=models.deletion.SET_NULL, related_name="creator_of_comment", null=True)
+    answer_to = models.ForeignKey(User, on_delete=models.deletion.SET_NULL, related_name="answer_to_comment", null=True)
     answer_to_comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="answered_to_comment_ref")
-    thread_id = models.ForeignKey(ThreadTheme, on_delete=models.CASCADE)
+    thread = models.ForeignKey(ThreadTheme, on_delete=models.CASCADE)
 
     class Meta():
         db_table = "comment_meta_info"
     
     def __str__(self):
-        return "Creator id: " + str(self.comment_id)
+        return "Creator id: " + str(self.comment)
 
 class LikedEntity(models.Model):
     id = models.BigAutoField(primary_key=True)
-    entity_id = models.OneToOneField(Entity, on_delete=models.CASCADE)
-    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
+    entity = models.OneToOneField(Entity, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     class Meta():
         db_table = "liked_entity"
