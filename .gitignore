@@ -6,5 +6,7 @@ bin/*
 forum/forum/__pycache__/*
 *.pyc
 .vscode/*
-frontentd/node_modules/*
-frontend/public/*
+node_modules/*
+public/*
+forum/.ipynb_checkpoints/*
+forum/*.ipynb
