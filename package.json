@@ -1,0 +1,29 @@
+{
+  "name": "unicorn_forum",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development ./forum/frontend/src/index.js --output ./forum/frontend/static/frontend/main.js",
+    "build": "webpack --mode production ./forum/frontend/src/index.js --output ./forum/frontend/static/frontend/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/chamberijorik/unicorn_forum.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/chamberijorik/unicorn_forum/issues"
+  },
+  "homepage": "https://gitlab.com/chamberijorik/unicorn_forum#README",
+  "devDependencies": {
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.14"
+  }
+}
