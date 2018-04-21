@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import DataProvider from "./Category/CategoryProvider";
-import Table from "./Category/CategoryTable";
+import DataProvider from "./CategoryProvider";
+import Table from "./CategoryTable";
 
 const App = () => (
   <DataProvider endpoint="api/category/" render={data => <Table data={data} />} />
