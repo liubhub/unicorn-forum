@@ -1,55 +1,114 @@
-import React from 'react';
+import React, {Component} from 'react'
 import ReactDOM from 'react-dom'; 
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
-// import MenuIcon from 'material-ui/icons/Menu';
+import MenuIcon from 'material-ui-icons/Menu';
+import AccountCircle from 'material-ui-icons/AccountCircle';
 
-const styles = {
+const styles = theme => ({
   root: {
-    flexGrow: 1,
+    marginTop: theme.spacing.unit *3,
+    width: '100%'
   },
   flex: {
-    flex: 1,
+    flex: 1
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20,
-  },
-};
+    marginRight: 20
+  }
+})
 
-function ButtonAppBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
+class Navbar extends Component {
+  render() {
+    const {classes} = this.props;
+
+    return (
+      <AppBar position="static" elevation={0}>
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            {/* <MenuIcon /> */}
-          </IconButton>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            Title
+          <IconButton className={classes.menuButton} color="contrast" onClick={this.props.toggleDrawer}><MenuIcon/></IconButton>
+          <Typography className={classes.flex} type="title" color="inherit">
+            Unicorn forum
           </Typography>
-          <Button color="inherit">Login</Button>
+          <div>
+            <IconButton color="contrast" onClick={this.props.login}>
+              <AccountCircle/>
+            </IconButton>
+          </div>
         </Toolbar>
       </AppBar>
-    </div>
-  );
+    )
+  }
 }
 
-ButtonAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
+Navbar.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
-const StyledAppBar = withStyles(styles)(ButtonAppBar);
-
-// export default withStyles(styles)(ButtonAppBar);
+const StyledAppBar = withStyles(styles)(Navbar);
 
 ReactDOM.render(<StyledAppBar />, document.getElementById('menu')); 
+
+
+
+// export default withStyles(styles)(Navbar);
+
+// import React from 'react';
+// import ReactDOM from 'react-dom'; 
+// import PropTypes from 'prop-types';
+// import { withStyles } from 'material-ui/styles';
+// import AppBar from 'material-ui/AppBar';
+// import Toolbar from 'material-ui/Toolbar';
+// import Typography from 'material-ui/Typography';
+// import Button from 'material-ui/Button';
+// import IconButton from 'material-ui/IconButton';
+// // import MenuIcon from 'material-ui/icons/Menu';
+
+// const styles = {
+//   root: {
+//     flexGrow: 1,
+//   },
+//   flex: {
+//     flex: 1,
+//   },
+//   menuButton: {
+//     marginLeft: -12,
+//     marginRight: 20,
+//   },
+// };
+
+// function ButtonAppBar(props) {
+//   const { classes } = props;
+//   return (
+//     <div className={classes.root}>
+//       <AppBar position="static">
+//         <Toolbar>
+//           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+//             {/* <MenuIcon /> */}
+//           </IconButton>
+//           <Typography variant="title" color="inherit" className={classes.flex}>
+//             Title
+//           </Typography>
+//           <Button color="inherit">Login</Button>
+//         </Toolbar>
+//       </AppBar>
+//     </div>
+//   );
+// }
+
+// ButtonAppBar.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
+
+// const StyledAppBar = withStyles(styles)(ButtonAppBar);
+
+// // export default withStyles(styles)(ButtonAppBar);
+
+// ReactDOM.render(<StyledAppBar />, document.getElementById('menu')); 
 
 // import React, { Component } from 'react';      
 // import ReactDOM from 'react-dom';      
