@@ -3,7 +3,7 @@ import shortid from "shortid";
 
 const uuid = shortid.generate;
 
-export default function baseModalWrapper(children, onClose) {
+export function baseModalWrapper(children, onClose) {
 
     const fields = children.map(child =>
         <div className="column" key={uuid()}> 
@@ -11,7 +11,8 @@ export default function baseModalWrapper(children, onClose) {
         </div>
     );
 
-    const modalWindowElements = <div className="modal is-active">
+    const modalWindowElements = 
+    <div className="modal is-active">
         <div className="modal-background"></div>
         <div className="modal-content">
             {fields}
@@ -22,6 +23,15 @@ export default function baseModalWrapper(children, onClose) {
     return modalWindowElements;
 }
 
-// export default function baseModalInput(){
+export function baseModalInput(_label, _type, _placeholder, onclick){
+    return (
+        <div className="field">
+            <label className="label">{_label}</label>
+            <div className="control">
+                <input className="input" type={_type} placeholder={_placeholder} onClick={onclick} />
+            </div>
+        </div>
+    )
+}
 
-// }
+    //  {/* TODO: CONTROLS for success & validation*/}
