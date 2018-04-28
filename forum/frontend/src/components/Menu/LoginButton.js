@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import PortalComponent from './LoginForm1';
+import LoginPortalComponent from './LoginForm';
 
 class LoginButton extends Component {
 
     constructor(props) {
-        super(props) // родительский констроуктор
+        super(props) 
         this.state = {
-            isClicked: false,//props.defaultOPen
+            isClicked: false,
         }
         this.handleClick = this.handleClick.bind(this)
     }
@@ -19,7 +19,7 @@ class LoginButton extends Component {
                 <div>Log in</div>
                 {
                     this.state.isClicked && (
-                        <PortalComponent onClose={() => this.setState({ isClicked: false })} />
+                        <LoginPortalComponent onClose={() => this.setState({ isClicked: false })} />
                     )
                 }
             </div>
