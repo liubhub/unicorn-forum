@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import LoginForm from './LoginForm';
 
 class LoginButton extends Component {
-    // state = {
-    //     isOpen: false,
-    // }
 
     constructor(props) {
         super(props) // родительский констроуктор
         this.state = {
-            isOpen: props.defaultOPen
+            isClicked: false,//props.defaultOPen
         }
         this.handleClick = this.handleClick.bind(this)
     }
@@ -18,18 +15,22 @@ class LoginButton extends Component {
         console.log('Rendering the LoginButton!!!');
         return (
             <div className="button" id="login" onClick={this.handleClick}>
-                <span>Log in</span>
-                { this.state.isOpen ? <LoginForm /> : null }
-                {/* {this.state.isOpen ? "close" : "open"} */}
-
+                <div>Log in</div>
+                {/* передать сюда аргумент которые меняет состояние из-эктив */}
+                <LoginForm is_active={this.state.isClicked}/>
             </div>
         )
     }
 
-    handleClick() {
+    handleClick(event) {
         console.log('Clicked');
+        console.log(event);
+        event.stopPropagation();
+        console.log('stopped')
+        // event.stopPropagation ? event.stopPropagation() : (event.cancelBubble=true);
+        // event.stopImmediatePropagation() ;
         this.setState({
-            isOpen: !this.state.isOpen,
+            isClicked: !this.state.isClicked,
         });
     }
 }

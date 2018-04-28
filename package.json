@@ -36,7 +36,9 @@
     "webpack-cli": "^2.0.14"
   },
   "dependencies": {
+    "css-loader": "^0.28.11",
     "material-ui": "^1.0.0-beta.42",
-    "material-ui-icons": "^1.0.0-beta.36"
+    "material-ui-icons": "^1.0.0-beta.36",
+    "style-loader": "^0.21.0"
   }
 }

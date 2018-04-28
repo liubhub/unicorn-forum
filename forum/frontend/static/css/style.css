@@ -1,3 +1,6 @@
 .navbar-link::after{
     border: none;
 }
+.columns{
+    background-color: azure;
+}
