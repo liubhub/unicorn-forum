@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 
-
-
-// const loginFormComponent = 
+import '../../../static/css/style.css'
 
 
 const PortalComponent = ({ onClose }) => {
