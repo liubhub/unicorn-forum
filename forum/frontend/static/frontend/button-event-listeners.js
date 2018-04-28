@@ -14,8 +14,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var registerButton = document.getElementById('register');
     var loginButton = document.getElementById('login');
-
-    // registerButton.onclick
-    // loginButton.onclick
-
   });

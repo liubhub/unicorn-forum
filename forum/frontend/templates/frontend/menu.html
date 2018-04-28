@@ -9,25 +9,19 @@
 
     <div id="navMenubd-example" class="navbar-menu">
         <div class="navbar-start">
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a href="#" class="navbar-link">
-                    Unicorn
-                </a>
-            </div>
-            <div class="navbar-item has-dropdown is-hoverable is-mega">
-                <a class="navbar-link">
-                    Threads
-                </a>
-            </div>
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    Categories
-                </a>
-            </div>
-            <a class="navbar-item " href="http://bulma.io/expo/">
+            <a class="navbar-item is-hoverable">
+               Unicorn
+            </a>
+            <a class="navbar-item  is-hoverable">
+                Threads
+            </a>
+            <a class="navbar-item is-hoverable">
+                Categories
+            </a>
+            <a class="navbar-item is-hoverable" href="http://bulma.io/expo/">
                 <span class="bd-emoji">❤️</span> &nbsp;Users
             </a>
-            <a class="navbar-item " href="http://bulma.io/love/">
+            <a class="navbar-item is-hoverable" href="http://bulma.io/love/">
                 <span class="bd-emoji">🎨</span> &nbsp;Build Process&nbsp;
                 <span class="bd-emoji">🎨</span>
             </a>
@@ -62,4 +56,5 @@
 {% load static %}
 <script src="{% static "frontend/login.js" %}"></script>
 <script src="{% static "frontend/register.js" %}"></script>
+<script src="{% static "frontend/button-event-listeners.js" %}"></script>
 {% block 'navbar' %} {% endblock %}
