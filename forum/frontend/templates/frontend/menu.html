@@ -1,0 +1,67 @@
+<nav class="navbar ">
+    <div class="navbar-brand">
+        <div class="navbar-burger burger" data-target="navMenubd-example">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div id="navMenubd-example" class="navbar-menu">
+        <div class="navbar-start">
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a href="#" class="navbar-link">
+                    Unicorn
+                </a>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable is-mega">
+                <a class="navbar-link">
+                    Threads
+                </a>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                    Categories
+                </a>
+            </div>
+            <a class="navbar-item " href="http://bulma.io/expo/">
+                <span class="bd-emoji">❤️</span> &nbsp;Users
+            </a>
+            <a class="navbar-item " href="http://bulma.io/love/">
+                <span class="bd-emoji">🎨</span> &nbsp;Build Process&nbsp;
+                <span class="bd-emoji">🎨</span>
+            </a>
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="field is-grouped">
+                    <p class="control">
+                        <a class="button" href="#">
+                            <span>
+                                Sign in
+                            </span>
+                        </a>
+
+                    </p>
+                    <p class="control">
+                        <a class="button is-primary" href="#">
+                            <span>Register</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                <div>🦄</div>
+                <p>Forum for unicorn programmers.</p>
+            </h1>
+        </div>
+    </div>
+</section>
+{% block 'navbar' %} {% endblock %}
