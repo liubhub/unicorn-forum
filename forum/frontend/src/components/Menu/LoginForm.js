@@ -1,23 +1,28 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
-
+import React, { Component } from 'react'
 
 class LoginForm extends Component {
-    state = {
-        isOpen: true,
-    }
-
-    render(){
+    // state = {
+    //     isOpen: false,
+    // }
+    render() {
         console.log('Rendering the LoginForm');
-        console.log(this.props);
         return (
-            <div>Hellllllo</div>
+            <div className="modal is-active">
+                <div className="modal-background"></div>
+                <div className="modal-content">
+                    {/* <p>Button was clicked, hello bitch!</p> */}
+                    <div className="container">
+                        
+
+                        <div className="field"></div>
+
+
+                    </div>
+                </div>
+                <button className="modal-close is-large" aria-label="close"></button>
+            </div>
         )
     }
-
-
 }
-
-// render(<LoginForm/>, document.getElementById('login'));
 
 export default LoginForm;

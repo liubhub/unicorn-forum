@@ -1,5 +1,7 @@
 import React from 'react'
 import {render} from 'react-dom'
 
-import LoginForm from "./components/Menu/LoginForm"
-render(<LoginForm/>, document.getElementById('login'));
+import LoginButton from "./components/Menu/LoginButton"
+// import LoginForm from "./components/Menu/LoginForm"
+
+render(<LoginButton/>, document.getElementById('loginButton'));
