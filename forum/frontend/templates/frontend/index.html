@@ -11,22 +11,17 @@
 <body>
 
 
-  <div id="portal"></div>
+  {% include 'frontend/menu.html' %} {% block 'navbar' %} {% endblock %}
 
-  {% extends 'frontend/menu.html' %} {% block 'navbar' %} {% endblock %}
+  <div id="portal">
+    <!-- React -->
+  </div>
 
 
-  <section class="section">
-    <div class="container">
-      <div id="app" class="columns">
-        <!-- React -->
-      </div>
-      <p>Hello</p>
-    </div>
-  </section>
+  {% block 'footer' %} {% include 'frontend/footer.html' %} {% endblock %}
+
 
 </body>
 {% load static %}
 <script src="{% static " frontend/main.js " %}"></script>
-
 </html>
