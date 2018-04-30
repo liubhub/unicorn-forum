@@ -88,19 +88,20 @@ class ThreadTheme(models.Model):
         db_table = "thread_theme"
     
     def __str__(self):
-        return str(self.entity) + ", " + str(self.subject)
+        # return str(self.entity) + ", " + str(self.subject)
+        return self.subject
 
 class Comment(models.Model):
     entity = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
     content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
+    # created_at = models.DateTimeField(auto_now_add=True)
+    # updated_at = models.DateField(auto_now=True)
 
     class Meta():
         db_table = "comment"
     
-    def __str__(self):
-        return self.entity
+    # def __str__(self):
+    #     return self.entity
 
 class CommentMeta(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="main_comment_ref")
@@ -108,12 +109,13 @@ class CommentMeta(models.Model):
     answer_to = models.ForeignKey(User, on_delete=models.deletion.SET_NULL, related_name="answer_to_comment", null=True)
     answer_to_comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="answered_to_comment_ref",null=True)
     thread = models.ForeignKey(ThreadTheme, on_delete=models.CASCADE)
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
     class Meta():
         db_table = "comment_meta_info"
     
-    def __str__(self):
-        return "Creator id: " + str(self.comment)
+    # def __str__(self):
+    #     return self.comment
 
 class LikedEntity(models.Model):
     id = models.BigAutoField(primary_key=True)
