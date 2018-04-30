@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 
-import {baseModalWrapper, baseModalInput} from './BaseModalComponent'
-import '../../../static/css/style.css'
-
+import {baseModalWrapper, baseModalInput} from './BaseModalComponent';
 
 const onInputClick = (event) => { event.stopPropagation() };
 

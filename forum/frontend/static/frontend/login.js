@@ -137,7 +137,7 @@ eval("\nvar content = __webpack_require__(/*! !../../../../node_modules/css-load
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \".navbar-link::after{\\n    border: none;\\n}\\n.columns{\\n    background-color: azure;\\n}\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./forum/frontend/static/css/style.css?./node_modules/css-loader");
+eval("exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \".navbar-link::after{\\n    border: none;\\n}\\n.columns{\\n    background-color: azure;\\n}\\n#category_dropdown{\\n    margin: 3em 0 3em 0;\\n}\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./forum/frontend/static/css/style.css?./node_modules/css-loader");
 
 /***/ }),
 

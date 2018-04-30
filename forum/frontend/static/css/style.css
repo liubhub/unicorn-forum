@@ -4,3 +4,6 @@
 .columns{
     background-color: azure;
 }
+#category_dropdown{
+    margin: 3em 0 3em 0;
+}
