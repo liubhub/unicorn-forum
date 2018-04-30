@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack --mode development ./forum/frontend/src/styles.js --output ./forum/frontend/static/frontend/styles.js",
+    "dev": "webpack --mode development ./forum/frontend/src/threads.js --output ./forum/frontend/static/frontend/threads.js",
     "build": "webpack --mode production ./forum/frontend/src/index.js --output ./forum/frontend/static/frontend/main.js"
   },
   "repository": {
@@ -38,8 +38,9 @@
   },
   "dependencies": {
     "css-loader": "^0.28.11",
-    "material-ui": "^1.0.0-beta.42",
+    "material-ui": "^1.0.0-beta.44",
     "material-ui-icons": "^1.0.0-beta.36",
+    "react-material-icons": "^1.0.3",
     "style-loader": "^0.21.0"
   }
 }
