@@ -17,23 +17,21 @@ export function baseModalWrapper(title, children, onClose, main_button_text,add_
         <div className="modal-card">
 
             <header className="modal-card-head">
-                <p class="modal-card-title">{title}</p>
-                <button class="delete" aria-label="close"></button>
+                <p className="modal-card-title">{title}</p>
+                <button className="delete" aria-label="close"></button>
             </header>
 
-            <section class="modal-card-body">
+            <section className="modal-card-body">
                 {fields}
             </section>
 
-        <footer class="modal-card-foot">
-            <button class="button is-success">{main_button_text}</button>
-            <button class="button is-text">{add_button_text}</button>
+        <footer className="modal-card-foot">
+            <button className="button is-success">{main_button_text}</button>
+            <button className="button is-text">{add_button_text}</button>
 
         </footer>
             
         </div>
-
-        {/* <button className="modal-close is-large" aria-label="close" onClick={onClose}></button> */}
     </div>
 
     return modalWindowElements;
