@@ -144,3 +144,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # this one is for uploads (avatar etc.)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+ACCOUNT_ACTIVATION_DAYS = 5
