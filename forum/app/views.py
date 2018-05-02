@@ -6,22 +6,15 @@ from app.models import Category
 from app.serializers import CategorySerializer
 from rest_framework import generics
 
+
 from . import models
 
 class CategoryListCreate(generics.ListCreateAPIView):
+    # /api/category
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
-    # def list(self, request):
-    #     # Note the use of `get_queryset()` instead of `self.queryset`
-    #     queryset = self.get_queryset()
-    #     serializer = CategorySerializer(queryset, many=True)
-    #     return Response(serializer.data)
 
-
-
-# from app import models
-# from django.http import JsonResponse
 
 def collect_threads_info():
     threads_info = []
@@ -63,5 +56,37 @@ def collect_threads_info():
     return threads_info
 
 def threads_view(request):
+    # /api/threads
     print(request)
     return JsonResponse(collect_threads_info(), safe=False)
+
+
+
+
+
+# from django.shortcuts import render
+# from django.contrib.auth.models import User
+# from django.contrib.auth import authenticate, login
+# from django.http import HttpResponseRedirect
+# from django import forms
+
+# from .forms import UserRegistrationForm
+
+# def register(request):
+#     if request.method == 'POST':
+#         form = UserRegistrationForm(request.POST)
+#         if form.is_valid():
+#             userObj = form.cleaned_data
+#             username = userObj['username']
+#             email =  userObj['email']
+#             password =  userObj['password']
+#             if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
+#                 User.objects.create_user(username, email, password)
+#                 user = authenticate(username = username, password = password)
+#                 login(request, user)
+#                 return HttpResponseRedirect('/')
+#             else:
+#                 raise forms.ValidationError('Looks like a username with that email or password already exists')
+#     else:
+#         form = UserRegistrationForm()
+#     return render(request, 'frontend/register.html', {'form' : form})
