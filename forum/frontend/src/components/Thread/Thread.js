@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import axios from 'axios';
 import mui from 'material-ui';
-import shortid from "shortid";
 
 import ForumIcon from 'react-material-icons/icons/communication/forum';
-import DataProvider from './DataProvider';
-
 import './thread.css';
-
-const uuid = shortid.generate;
 
 let iconStyles = {
   fontSize: '12px',
@@ -57,22 +51,4 @@ MediaElement.propTypes = {
   thread: PropTypes.object.isRequired
 };
 
-
-function ThreadList(elements) {
-  const threadList = elements.map(elem => 
-    <MediaElement thread={elem}  key ={uuid()}/>
-  );
-  return (
-    <div> {threadList} </div>
-  )
-}
-
-
-const Threads = () => (
-  <DataProvider endpoint="api/threads/" render={data => 
-    ThreadList(data)
-  } 
-  />
-);
-
-export default Threads;
+export default MediaElement;

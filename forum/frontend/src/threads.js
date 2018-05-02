@@ -1,6 +1,6 @@
 import React from 'react'
 import {render} from 'react-dom'
 
-import Threads from "./components/Thread/Thread.js"
+import ThreadList from "./components/ThreadList/ThreadList"
 
-render(<Threads/>, document.querySelector('#threads .section .container'));
+render(<ThreadList />, document.querySelector('#threads .section .container'));
