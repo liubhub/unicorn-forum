@@ -1,0 +1,14 @@
+p.details{
+    margin-bottom: 0 !important;
+}
+.num-of-replies{
+    font-size: 0.75em;
+    margin-left: 2em;
+}
+
+.author-of-comment{
+    padding-right: 25px;
+}
+.media{
+    cursor: pointer;
+}
