@@ -3,7 +3,7 @@ import shortid from "shortid";
 
 const uuid = shortid.generate;
 
-export function baseModalWrapper(title, children, onClose, main_button_text,add_button_text) {
+export function baseModalWrapper(title, action, children, onClose, main_button_text,add_button_text) {
 
     const fields = children.map(child =>
         <div className="column" key={uuid()}> 
@@ -15,7 +15,7 @@ export function baseModalWrapper(title, children, onClose, main_button_text,add_
     <div className="modal is-active">
         <div className="modal-background"></div>
         <div className="modal-card">
-
+        <form action={action} method="post">
             <header className="modal-card-head">
                 <p className="modal-card-title">{title}</p>
                 <button className="delete" aria-label="close"></button>
@@ -30,7 +30,7 @@ export function baseModalWrapper(title, children, onClose, main_button_text,add_
             <button className="button is-text">{add_button_text}</button>
 
         </footer>
-            
+         </form>   
         </div>
     </div>
 

@@ -13,7 +13,7 @@ var fields = [
 const LoginPortalComponent = ({ onClose }) => {
     console.log(fields);
     return ReactDOM.createPortal(
-        baseModalWrapper('Log In', fields, onClose, 'Log in', "Forgot Password?"), document.getElementById("portal")
+        baseModalWrapper('Log In','/login', fields, onClose, 'Log in', "Forgot Password?"), document.getElementById("portal")
     );
 };
 

@@ -16,7 +16,7 @@ var fields = [
 
 const RegisterPortalComponent = ({ onClose }) => {
     return ReactDOM.createPortal(
-        baseModalWrapper('Register', fields, onClose, 'Register', "Cancel"), document.getElementById("portal")
+        baseModalWrapper('Register', '/register', fields, onClose, 'Register', "Cancel"), document.getElementById("portal")
     );
 };
 
