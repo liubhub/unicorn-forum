@@ -61,6 +61,18 @@ def threads_view(request):
     return JsonResponse(collect_threads_info(), safe=False)
 
 
+def register(request):
+    if request.method == 'POST':
+        print('Post')
+        print(request.POST)
+        #print(request.data)
+    else:
+        print('Get')
+        print(request.GET)
+        #print(request.data)
+    
+    return JsonResponse({'hello': 'world'})
+
 
 
 
