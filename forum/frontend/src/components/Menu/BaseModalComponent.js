@@ -26,7 +26,7 @@ export function baseModalWrapper(title, action, children, onClose, main_button_t
             </section>
 
         <footer className="modal-card-foot">
-            <button className="button is-success"  type="button">{main_button_text}</button>
+            <button className="button is-success" onClick={registerUser()} type="button">{main_button_text}</button>
             <button className="button is-text">{add_button_text}</button>
 
         </footer>
@@ -35,6 +35,10 @@ export function baseModalWrapper(title, action, children, onClose, main_button_t
     </div>
 
     return modalWindowElements;
+}
+
+function registerUser(){
+
 }
 
 export function baseModalInput(_label, _type, _placeholder, onclick){
