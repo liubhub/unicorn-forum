@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
+
+
+import Validator from '../Validation/Validator';
 
 const onInputClick = (event) => { event.stopPropagation() };
 
