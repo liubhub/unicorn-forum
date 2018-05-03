@@ -23,7 +23,7 @@ class RegisterButton extends Component {
                         // <RegisterPortalComponent onClose={() => this.setState({ isClicked: false })} />
                         <RegisterForm  
                             // onClose={() => this.setState({ isClicked: false })} 
-                            action="/register"
+                            action="/register/"
                             title="Register"
                             actionButtonText="Register"
                             cancelButtonText="Cancel"

@@ -62,8 +62,12 @@ def threads_view(request):
 
 
 from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt
 
-@csrf_protect
+# @csrf_protect
+# @ensure_csrf_cookie
+@csrf_exempt
 def register(request):
     if request.method == 'POST':
         print('Post')
