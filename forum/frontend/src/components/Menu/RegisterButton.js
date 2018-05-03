@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import RegisterPortalComponent from './RegisterForm';
+// import RegisterPortalComponent from './RegisterForm';
+
+import RegisterForm from '../Forms/Register/RegisterForm'; 
 
 class RegisterButton extends Component {
 
@@ -18,7 +20,14 @@ class RegisterButton extends Component {
                 <div>Register</div>
                 {
                     this.state.isClicked && (
-                        <RegisterPortalComponent onClose={() => this.setState({ isClicked: false })} />
+                        // <RegisterPortalComponent onClose={() => this.setState({ isClicked: false })} />
+                        <RegisterForm  
+                            // onClose={() => this.setState({ isClicked: false })} 
+                            action="/register"
+                            title="Register"
+                            actionButtonText="Register"
+                            cancelButtonText="Cancel"
+                         />
                     )
                 }
             </div>
