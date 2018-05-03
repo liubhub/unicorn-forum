@@ -57,6 +57,28 @@ class RegisterForm extends Component {
         console.log(this.state.username);
         console.log(this.state.pass1);
         console.log(this.state.email);
+
+
+        var userFormData = new FormData();
+        userFormData.set('username', this.state.username);
+        userFormData.set('email', this.state.email);
+        userFormData.set('password1', this.state.pass1);
+        userFormData.set('password2', this.state.pass2);
+
+        axios({
+            method: 'post',
+            url: '/register/',
+            data: userFormData,
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+        })
+            .then(function (response) {
+                //handle success
+                console.log(response);
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
     }
 
 
