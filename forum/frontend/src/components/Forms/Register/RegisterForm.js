@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import Cookies from 'js-cookie';
 
 const onInputClick = (event) => { event.stopPropagation() };
+
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+// var csrftoken = Cookies.get('csrftoken');
+
+
 
 function FormWrapper(props) {
     return(
@@ -59,20 +66,30 @@ class RegisterForm extends Component {
         console.log(this.state.email);
 
 
+        //  TODO: VALIDATION
+
         var userFormData = new FormData();
         userFormData.set('username', this.state.username);
         userFormData.set('email', this.state.email);
         userFormData.set('password1', this.state.pass1);
         userFormData.set('password2', this.state.pass2);
 
+
+        const csrftoken = Cookies.get('csrftoken');
+        const config = {
+            headers: {
+                'HTTP_X_CSRFTOKEN': csrftoken, 
+                'Content-Type': 'multipart/form-data'
+            },
+        }
+
         axios({
             method: 'post',
             url: '/register/',
             data: userFormData,
-            config: { headers: {'Content-Type': 'multipart/form-data' }}
+            config: config
         })
             .then(function (response) {
-                //handle success
                 console.log(response);
             })
             .catch(function (response) {

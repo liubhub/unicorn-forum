@@ -61,11 +61,14 @@ def threads_view(request):
     return JsonResponse(collect_threads_info(), safe=False)
 
 
+from django.views.decorators.csrf import csrf_protect
+
+@csrf_protect
 def register(request):
     if request.method == 'POST':
         print('Post')
         print(request.POST)
-        #print(request.data)
+        print(request)
     else:
         print('Get')
         print(request.GET)
