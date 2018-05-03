@@ -31,7 +31,6 @@ class Validator{
         this.maxUsernameLen = 50;
         this.minPassLen = 8;
 
-
         this.rules = {
             'username': [isEmpty, startsWithNum, containsSpaces, usernameLength],
             'email': [isEmpty, validateEmail],
@@ -39,17 +38,20 @@ class Validator{
         }
     }
 
+    //  TODO!!!
+
     validate(){
         var rules = this.rules[this.field];
         for(let i = 0; i < rules.length; i++){
+            // if(typeof this.value === 'string' || this.value instanceof String){
+            //     let result = rules[i](this.value);
+            // }else{
+            //     let
+            // }
             let result = rules[i](this.value);
             if(result){
                 return result;
             }
-            // else{
-            //     // console.log('OK!');
-            //     // continue
-            // }
         }
         return false;
     }
@@ -57,21 +59,3 @@ class Validator{
 }
 
 export default Validator;
-
-// passLength(){
-//     return !(this.value.length < this.minPassLen);
-// }
-
- // isEmpty(){
-    //     return !this.value;
-    // }
-
-    // startsWithNum(){
-    //     return /^\d/.test(this.value);
-    // }
-
-    // containsSpaces(){
-    //     return /\s/.test(this.value);
-    // }
-
-// return this.value.match('/^\d/') ? true : false;

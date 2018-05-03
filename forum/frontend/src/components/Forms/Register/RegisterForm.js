@@ -12,8 +12,6 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 // var csrftoken = Cookies.get('csrftoken');
 
-
-
 function FormWrapper(props) {
     return(
     <div className="modal is-active">
@@ -53,21 +51,29 @@ class RegisterForm extends Component {
 
 
     handleInputChange(event) {
-        const value =  event.target.value;
-        const name = event.target.name;
+        var value =  event.target.value;
+        var name = event.target.name;
         this.setState({
           [name]: value
         });
+
+        console.log('Validating...');
+
+        if (name == 'pass1' || name == 'pass2') name = 'password';
+
+        var validator = new Validator(value, name);
+        var res = validator.validate();
+        if (res){
+            console.log(res);
+        }else{
+            console.log('GOOD!');
+        }
       }
 
     
     handleSubmit(event){
         event.preventDefault();
         console.log(this.state);
-        console.log(this.state.username);
-        console.log(this.state.pass1);
-        console.log(this.state.email);
-
 
         //  TODO: VALIDATION
 
