@@ -47,24 +47,22 @@ class RegisterForm extends Component {
 
     handleInputChange(event) {
         const value = event.target.value;
-        const name = event.target.name;
+        var name = event.target.name;
         this.setState({
             [name]: value
         });
 
-        if (name !== 'pass1' && name != 'pass2') {
+        if (name !== 'pass1' || name != 'pass2') {
+            name = 'password';
+        }
+        console.log('Validating...');
 
-            console.log('Validating...');
-
-            var validator = new Validator(value, name);
-            var res = validator.validate();
-            if (res) {
-                console.log(res);
-            } else {
-                console.log('GOOD!');
-            }
+        var validator = new Validator(value, name);
+        var res = validator.validate();
+        if (res) {
+            console.log(res);
         } else {
-            console.log('passwords')
+            console.log('GOOD!');
         }
     }
 
@@ -98,9 +96,9 @@ class RegisterForm extends Component {
             }).then(function (response) {
                 console.log(response);
             })
-                .catch(function (response) {
-                    console.log(response);
-                });
+            .catch(function (response) {
+                console.log(response);
+            });
         }
     }
 
