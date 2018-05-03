@@ -52,10 +52,10 @@ class RegisterForm extends Component {
             [name]: value
         });
 
-        if (name !== 'pass1' || name != 'pass2') {
+        if (name == 'pass1' || name == 'pass2') {
             name = 'password';
         }
-        console.log('Validating...');
+        console.log('Validating: ', name);
 
         var validator = new Validator(value, name);
         var res = validator.validate();
@@ -69,6 +69,7 @@ class RegisterForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        event.stopPropagation();
 
         if (!(this.state.pass1 == this.state.pass2)) {
             console.log('Passwords don\'t match!!!');
