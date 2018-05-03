@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import Cookies from 'js-cookie';
-
 
 import Validator from '../Validation/Validator';
 
-// axios.defaults.xsrfCookieName = 'csrftoken';
-// axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-
-// axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"; 
-// axios.defaults.xsrfCookieName = "XCSRF-TOKEN";
 
 const onInputClick = (event) => { event.stopPropagation() };
 
@@ -90,8 +83,9 @@ class RegisterForm extends Component {
             userFormData.set('password1', this.state.pass1);
             userFormData.set('password2', this.state.pass2);
 
+
             const config = {
-                headers: {,
+                headers: {
                     'Content-Type': 'multipart/form-data'
                 },
             };
@@ -107,25 +101,6 @@ class RegisterForm extends Component {
                 .catch(function (response) {
                     console.log(response);
                 });
-
-
-
-            // fetch('/register/', {
-            //     method: 'POST',
-            //     mode: 'same-origin',
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //         'X-CSRFToken': csrftoken
-            //     },
-            //     body: userFormData,
-            // }).then(function(response){
-            //     console.log(response);
-            // }).catch(function(err){
-            //     console.log(err);
-            // })
-            
-            //   }
-
         }
     }
 

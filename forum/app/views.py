@@ -6,6 +6,7 @@ from app.models import Category
 from app.serializers import CategorySerializer
 from rest_framework import generics
 
+from django.views.decorators.csrf import csrf_exempt
 
 from . import models
 
@@ -60,13 +61,6 @@ def threads_view(request):
     print(request)
     return JsonResponse(collect_threads_info(), safe=False)
 
-
-from django.views.decorators.csrf import csrf_protect
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.views.decorators.csrf import csrf_exempt
-
-# @csrf_protect
-# @ensure_csrf_cookie
 @csrf_exempt
 def register(request):
     if request.method == 'POST':
