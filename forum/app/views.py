@@ -1,20 +1,16 @@
+# TODO: if username or email exists
 # TODO: ajax request if username already exists
 # TODO: after first login show template with notification in profile to add data about user
 # TODO: template about email confirmaion
 # TODO: render template message about email confirmation
 
-
-from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework import generics
 
 from django.http import HttpResponse, JsonResponse
-from rest_framework.response import Response
-from app.models import Category
-from app.serializers import CategorySerializer
-from rest_framework import generics
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -26,7 +22,12 @@ from . import models
 from .forms import SignupForm
 from .tokens import account_activation_token
 from .utils import collect_threads_info
+from app.models import Category
+from app.serializers import CategorySerializer
 
+
+def signin(request):
+    pass
 
 def threads_view(request):
     # /api/threads
@@ -44,7 +45,7 @@ def register(request):
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activate your account.'
-            message = render_to_string('email.html', {
+            message = render_to_string('email_confirm_template.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(), #urlsafe_base64_encode(force_bytes(user.pk)),
@@ -55,7 +56,11 @@ def register(request):
                         mail_subject, message, to=[to_email] #fail_silently=False
             )
             email.send()
-            return HttpResponse('Please confirm your email address to complete the registration')
+            # return HttpResponse('Please confirm your email address to complete the registration')
+            return render(request, 'email_message_redirect.html',{'email': to_email})
+        else:
+            resp = 'Something went wrong'
+            return JsonResponse(resp, safe=False, stutus=400)
     else:
         # form = SignupForm()
         resp = 'Method Not Allowed'
