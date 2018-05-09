@@ -1,3 +1,6 @@
+# TODO: after first login show template with notification in profile to add data about user
+# TODO: template about email confirmaion
+
 from django.shortcuts import render
 
 from django.http import HttpResponse, JsonResponse
@@ -66,13 +69,12 @@ def threads_view(request):
 @csrf_exempt
 def register(request):
     if request.method == 'POST':
-        # TODO: render template with new form for additional data
+        # TODO: render template message about email confirmation
         # debug only
         print(request.POST)
     else:
         resp = 'Method Not Allowed'
         return JsonResponse(resp, status=405, safe=False)
-    
     return JsonResponse({'hello': 'world'})
 
 
