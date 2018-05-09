@@ -26,7 +26,7 @@ class LoginForm extends Component {
     handleSubmit(event) {
         event.preventDefault();
         event.stopPropagation();
-
+        console.log('click');
         var userFormData = new FormData();
 
         userFormData.set('username', this.state.username);
@@ -38,19 +38,25 @@ class LoginForm extends Component {
             },
         };
 
-        console.log(userFormData);
-        // axios({
-        //     method: 'post',
-        //     url: '/login/',
-        //     data: userFormData,
-        //     config: config
-        // }).then(function (response) {
-        //     console.log(response)
-        // })
-        // .catch(function (response) {
-        //     console.log(response);
-        // });
-        // }
+        // console.log(userFormData);
+        console.log('Sending request...')
+        axios({
+            method: 'post',
+            url: '/login/',
+            data: userFormData,
+            config: config
+        }).then(function (response) {
+            console.log(response);
+            console.log(response.data);
+            const token = response.data.token;
+            if(token){
+                localStorage.setItem('token', token);
+            }
+        })
+        .catch(function (response) {
+            console.log(response);
+        });
+        console.log('Всё');
     }
 
     render() {
