@@ -95,7 +95,8 @@ class RegisterForm extends Component {
                 data: userFormData,
                 config: config
             }).then(function (response) {
-                console.log(response);
+                const url = response.data.url;
+                window.location.href = url;
             })
             .catch(function (response) {
                 console.log(response);

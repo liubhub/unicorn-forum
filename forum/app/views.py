@@ -56,16 +56,21 @@ def register(request):
                         mail_subject, message, to=[to_email] #fail_silently=False
             )
             email.send()
+            return JsonResponse({'url': '/verify'})
             # return HttpResponse('Please confirm your email address to complete the registration')
-            return render(request, 'email_message_redirect.html',{'email': to_email})
+            # return render(request, 'email_message_redirect.html',{'email': to_email})
         else:
             resp = 'Something went wrong'
             return JsonResponse(resp, safe=False, stutus=400)
     else:
+        # TODO: render same form
         # form = SignupForm()
         resp = 'Method Not Allowed'
         return JsonResponse(resp, status=405, safe=False)
     return JsonResponse({'you':'registered'}) # render(request, 'signup.html', {'form': form})
+
+def verify(request):
+    return render(request, 'email_message_redirect.html')
 
 def activate(request, uidb64, token):
     # /activate
