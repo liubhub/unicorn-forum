@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import socket
 from .base import get_env_variable
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -152,3 +153,16 @@ LOGIN_REDIRECT_URL = '/'
 # APPEND_SLASH=False
 
 # CSRF_COOKIE_NAME = 'X-CSRFToken'#'X-CSRFToken' # "XCSRF-TOKEN"
+
+EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.yahoo.com'
+EMAIL_HOST_USER = 'lihub.dev@gmail.com'#'konstantin_geev@yahoo.com'
+EMAIL_HOST_PASSWORD = 'edinorozhek1996pony'
+EMAIL_PORT = 587
+EMAIL_HOST = socket.gethostbyname('smtp.gmail.com')
+
+DEFAULT_FROM_EMAIL = 'Unicorn Forum Dev'
+# EMAIL_USE_TLS = False
+
+#  telnet smtp.xxxx.com.kh 25
+# telnet smtp.yahoo.com 587
