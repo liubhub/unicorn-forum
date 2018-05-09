@@ -8,6 +8,7 @@ from rest_framework import generics
 
 from django.views.decorators.csrf import csrf_exempt
 
+
 from . import models
 
 class CategoryListCreate(generics.ListCreateAPIView):
@@ -61,16 +62,16 @@ def threads_view(request):
     print(request)
     return JsonResponse(collect_threads_info(), safe=False)
 
+
 @csrf_exempt
 def register(request):
     if request.method == 'POST':
-        print('Post')
+        # TODO: render template with new form for additional data
+        # debug only
         print(request.POST)
-        print(request)
     else:
-        print('Get')
-        print(request.GET)
-        #print(request.data)
+        resp = 'Method Not Allowed'
+        return JsonResponse(resp, status=405, safe=False)
     
     return JsonResponse({'hello': 'world'})
 
