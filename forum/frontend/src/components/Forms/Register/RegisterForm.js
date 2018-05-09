@@ -2,32 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import Validator from '../Validation/Validator';
-
-
-const onInputClick = (event) => { event.stopPropagation() };
-
-function FormWrapper(props) {
-    return (
-        <div className="modal is-active">
-            <div className="modal-background"></div>
-            <div className="modal-card">
-                {props.children}
-            </div>
-        </div>
-    )
-}
-
-function InputWrapper(props) {
-    return (
-        <div className="field">
-            <label className="label">{props.label}</label>
-            <div className="control">
-                <input className="input" name={props.name} type={props.type} placeholder={props.placeholder} onChange={props.onChange} onClick={onInputClick} />
-            </div>
-        </div>
-    )
-}
-
+import {onInputClick, FormWrapper,InputWrapper} from '../common';
 
 class RegisterForm extends Component {
     constructor(props) {

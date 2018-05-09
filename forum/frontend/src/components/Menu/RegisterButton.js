@@ -1,3 +1,5 @@
+// TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 import React, { Component } from 'react';
 
 // import RegisterPortalComponent from './RegisterForm';
@@ -17,7 +19,7 @@ class RegisterButton extends Component {
     render() {
         return (
             <div className="button is-primary" id="register" onClick={this.handleClick}>
-                <div>Register</div>
+                <div>{localStorage.getItem('token') ? "My profile": "Register"}</div>
                 {
                     this.state.isClicked && (
                         // <RegisterPortalComponent onClose={() => this.setState({ isClicked: false })} />
