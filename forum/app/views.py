@@ -35,6 +35,14 @@ from app.serializers import CategorySerializer
 # from users.models import User
 # from models import User
 
+@csrf_exempt
+def create_thread(request):
+    # тут нужно проверить хидер на токен аутентификации
+    # если нет то 403
+    # если да - запис в бд тред и статус 200
+    return JsonResponse({'hello':'world'})
+
+
 class Login(views.APIView):
     @csrf_exempt
     def post(self, request, *args, **kwargs):
@@ -57,9 +65,9 @@ class Login(views.APIView):
                 'email': user.email,
             }
             encoded_jwt = jwt.encode(payload, "SECRET_KEY")
-            print('Encode: ', encoded_jwt)
+            # print('Encode: ', encoded_jwt)
             jwt_token = {'token': encoded_jwt.decode('utf-8')} 
-            print('Decoded: ', jwt_token['token'])
+            # print('Decoded: ', jwt_token['token'])
             return HttpResponse(json.dumps(jwt_token), status=200, content_type="application/json")
             # return JsonResponse(jwt_token)
             # return Response(json.dumps(jwt_token),status=200, content_type="application/json")

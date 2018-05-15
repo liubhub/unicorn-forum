@@ -46,11 +46,12 @@ class LoginForm extends Component {
             data: userFormData,
             config: config
         }).then(function (response) {
-            console.log(response);
-            console.log(response.data);
+            // console.log(response);
+            // console.log(response.data);
             const token = response.data.token;
             if(token){
                 localStorage.setItem('token', token);
+                window.location.href = '/'
             }
         })
         .catch(function (response) {

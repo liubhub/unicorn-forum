@@ -14,8 +14,11 @@ class LoginButton extends Component {
 
     render() {
         return (
+            !(localStorage.getItem('token')) ?
             <div className="button" id="login" onClick={this.handleClick}>
-                <div>{ localStorage.getItem('token') ? "Log out": "Log in"}</div>
+                <div>Log in</div>
+                
+
                 {
                     this.state.isClicked && (
                         // <RegisterPortalComponent onClose={() => this.setState({ isClicked: false })} />
@@ -28,7 +31,15 @@ class LoginButton extends Component {
                          />
                     )
                 }
+
+
             </div>
+
+            :  (
+            <div className="button" id="login" onClick={this.logOut}>
+                <div>Log out</div>
+            </div>
+            )
         )
     }
 
@@ -37,6 +48,14 @@ class LoginButton extends Component {
             isClicked: !this.state.isClicked,
         });
     }
+
+    logOut(event){
+
+        // axios()
+
+        localStorage.removeItem('token');
+    }
+    
 }
 
 export default LoginButton;
