@@ -36,8 +36,8 @@ class LoginButton extends Component {
             </div>
 
             :  (
-            <div className="button" id="login" onClick={this.logOut}>
-                <div>Log out</div>
+            <div className="button" id="login">
+                <div onClick={this.logOut}>Log out</div>
             </div>
             )
         )
@@ -50,10 +50,8 @@ class LoginButton extends Component {
     }
 
     logOut(event){
-
-        // axios()
-
         localStorage.removeItem('token');
+        window.location.href = '/';
     }
     
 }
