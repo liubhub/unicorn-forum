@@ -11,6 +11,7 @@ class Select extends Component {
         this.state = {
             data: null,
         }
+        this.onChange = this.props.onChange.bind(this);
     }
 
     componentWillMount() {
@@ -22,34 +23,15 @@ class Select extends Component {
     }
 
     render() {
-        console.log('OPTOiofuioui',this.state.data);
-        // var options;
-        if(this.state.data){
-            // options = this.state.data.map(function(elem, index){
-            //     <option key= {elem.id} value={elem.category_name} selected={index == 0 ? true : false}>{elem.category_name}</option>
-            // })
-            var options = this.state.data.map(elem =>
-                <option key={elem.id}>{elem.category_name}</option>
-            )
-        
-        }else{
-            var options = ['jiji','pjoijoij'];
-        }
         return this.state.data ? (
-            <div className="select">
-                <select name="category">
+
+                <select id="selection" name="category" onChange={this.onChange} defaultValue={this.props.value} required>
                     {
-                        // options
                         this.state.data.map(elem =>
                             <option key={elem.id}>{elem.category_name}</option>
                         )
-                        // this.state.data.map(function(elem, index){
-                        //     <option key= {elem.id} value={elem.category_name} selected={index == 0 ? true : false}>{elem.category_name}</option>
-                        // })
-
                     }
                 </select>
-            </div>
         ) : null
     }
 }
@@ -61,6 +43,7 @@ class ThreadModalForm extends Component {
         this.state = {
             subject: '',
             content: '',
+            category: '',
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -70,6 +53,7 @@ class ThreadModalForm extends Component {
     handleInputChange(event) {
         const value = event.target.value;
         var name = event.target.name;
+        console.log(value, name);
         this.setState({
             [name]: value
         });
@@ -86,8 +70,10 @@ class ThreadModalForm extends Component {
 
         var userFormData = new FormData();
 
+        const category = this.state.category || document.querySelector('#selection').value;
         userFormData.set('subject', this.state.subject);
         userFormData.set('content', this.state.content);
+        userFormData.set('category', category);
 
         const config = {
             headers: {
@@ -113,7 +99,7 @@ class ThreadModalForm extends Component {
                 console.log(response);
             });
     }
-    // action='/thread'
+
     render() {
         return (
             <FormWrapper>
@@ -124,9 +110,12 @@ class ThreadModalForm extends Component {
                     </header>
 
                     <section className="modal-card-body">
-                        <InputWrapper name="subject" type="text" placeholder="Subject" onChange={this.handleInputChange} />
-                        <textarea placeholder="Content" onChange={this.handleInputChange} className="textarea" />
-                        <Select />
+                        <InputWrapper name="subject" type="text" placeholder="Subject" onChange={this.handleInputChange} value={this.state.subject.value}/>
+                        <textarea placeholder="Content" onChange={this.handleInputChange} className="textarea" value={this.state.content.value} name="content"/>
+                        <div className="select">
+                            <Select onChange={this.handleInputChange} value={this.state.category.value}/>
+                        </div>
+                        
                         {/* <InputWrapper name="category" type="text" placeholder="Category" onChange={this.handleInputChange} /> */}
                     </section>
 

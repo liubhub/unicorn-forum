@@ -34,8 +34,8 @@ const MediaElement = ({thread}) =>
     <div className="media-content">
       <div className="content">
         <div className="subject details">
-          <strong>{thread.subject}</strong> <small>{'@'+thread.author_username.toString()}</small>
-          <small>{dateDifference(thread.creation_date)}</small>
+          <strong>{thread.subject}</strong> <small>{'@'+thread.author_username.toString()+' '}</small>
+          <small>{dateDifference(thread.creation_date) == 'day' ? 'today' : dateDifference(thread.creation_date)}</small>
           <p className="details">{thread.content.length > max_thread_content ? thread.content.slice(0,max_thread_content) : thread.content}</p>
           <small className="category">{thread.category}</small>
           <ForumIcon style={iconStyles}/>

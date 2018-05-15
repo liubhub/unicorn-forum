@@ -131,18 +131,24 @@ def create_thread(request):
         return HttpResponse(status=403);
     Auth = TokenAuthentication()
     res = Auth.authenticate(request)
-    print(res)
-    # if res:
-    #     user, token = res
-    #     # Записать в треды
-    #     # category subject content user
-    #     thread = models.ThreadTheme
+    if res:
+        user, token = res
+        # Записать в треды
+        # category subject content user
+        print(request.POST)
 
-
-
-    # else:
-    #     return HttpResponse(status=400)
-    return JsonResponse({'hello':'world'})
+        category = models.Category.objects.get(category_name = request.POST.get('category'))
+        if category:
+            entity = models.Entity()
+            entity.save()
+            thread = models.ThreadTheme(entity=entity, subject=request.POST.get('subject'),\
+                content=request.POST.get('content'), user = user, category = category)
+            thread.save()
+            return HttpResponse(status=200)
+        else:
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=400)
 
 
 def threads_view(request):
