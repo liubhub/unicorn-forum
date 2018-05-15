@@ -1,8 +1,6 @@
 # TODO: if username or email exists
 # TODO: ajax request if username already exists
 # TODO: after first login show template with notification in profile to add data about user
-# TODO: template about email confirmaion
-# TODO: render template message about email confirmation
 
 import jwt
 import json
@@ -32,16 +30,6 @@ from .utils import collect_threads_info
 from app.models import Category
 from app.serializers import CategorySerializer
 
-# from users.models import User
-# from models import User
-
-@csrf_exempt
-def create_thread(request):
-    # тут нужно проверить хидер на токен аутентификации
-    # если нет то 403
-    # если да - запис в бд тред и статус 200
-    return JsonResponse({'hello':'world'})
-
 
 class Login(views.APIView):
     @csrf_exempt
@@ -65,30 +53,31 @@ class Login(views.APIView):
                 'email': user.email,
             }
             encoded_jwt = jwt.encode(payload, "SECRET_KEY")
-            # print('Encode: ', encoded_jwt)
             jwt_token = {'token': encoded_jwt.decode('utf-8')} 
-            # print('Decoded: ', jwt_token['token'])
             return HttpResponse(json.dumps(jwt_token), status=200, content_type="application/json")
-            # return JsonResponse(jwt_token)
-            # return Response(json.dumps(jwt_token),status=200, content_type="application/json")
         else:
             return Response({'Error': "Invalid username/password"}, status="400")
             # return JsonResponse({'Error': "Invalid credentials"},status=400)
 
-# TODO: к чему его коннектить??
+# TODO: к чему его коннектить
 # Это уже для проверки jwt когда чел авторизован,
 # например, для создания поста отправки сообщения
 # отправки комментария
+
+# def autho
+
 class TokenAuthentication(BaseAuthentication):
     model = None
 
     def get_model(self):
         return User
-
+        
+    @csrf_exempt
     def authenticate(self, request):
         auth = get_authorization_header(request).split()
-        if not auth or auth[0].lower() != b'token':
-            return None
+
+        if not auth or auth[0].lower() != b'bearer':
+            return
 
         if len(auth) == 1:
             msg = 'Invalid token header. No credentials provided.'
@@ -99,7 +88,8 @@ class TokenAuthentication(BaseAuthentication):
 
         try:
             token = auth[1]
-            if token=="null":
+            print(token)
+            if token == "null":
                 msg = 'Null token not allowed'
                 raise exceptions.AuthenticationFailed(msg)
         except UnicodeError:
@@ -121,29 +111,39 @@ class TokenAuthentication(BaseAuthentication):
                 id=userid,
                 is_active=True
             )
-            
-            if not user.token['token'] == token:
-                raise exceptions.AuthenticationFailed(msg)
-               
+            # print('ЩА НАВЕРНОЕ БУИТ ОШИБКА')
+            # print(user)
+            # if not user.token['token'] == token:
+                # raise exceptions.AuthenticationFailed(msg)
+              
         except jwt.ExpiredSignature or jwt.DecodeError or jwt.InvalidTokenError:
             return HttpResponse({'Error': "Token is invalid"}, status="403")
         except User.DoesNotExist:
             return HttpResponse({'Error': "Internal server error"}, status="500")
-
-        return (user, token)
-
-    def authenticate_header(self, request):
-        return 'Token'
+        if user:
+            return user, token
 
 
-# @csrf_exempt
-# def signin(request):
-#     if request.method == 'POST':
-#         print(request.POST)
-#         return JsonResponse({'ok':'ok'})
-#     else:
-#         resp = 'Method Not Allowed'
-#         return JsonResponse(resp, status=405, safe=False)
+
+@csrf_exempt
+def create_thread(request):
+    if request.method != 'POST':
+        return HttpResponse(status=403);
+    Auth = TokenAuthentication()
+    res = Auth.authenticate(request)
+    print(res)
+    # if res:
+    #     user, token = res
+    #     # Записать в треды
+    #     # category subject content user
+    #     thread = models.ThreadTheme
+
+
+
+    # else:
+    #     return HttpResponse(status=400)
+    return JsonResponse({'hello':'world'})
+
 
 def threads_view(request):
     # /api/threads

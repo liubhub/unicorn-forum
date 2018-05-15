@@ -1,9 +1,62 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {FormWrapper, InputWrapper}from '../Forms/common';
+import { FormWrapper, InputWrapper } from '../Forms/common';
 
-class ThreadModalForm extends Component{
-    constructor(props){
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+
+
+class Select extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: null,
+        }
+    }
+
+    componentWillMount() {
+        const url = '/api/category';
+        fetch(url)
+          .then(response => {
+            return response.json();
+          }).then(data => this.setState({data: data}));
+    }
+
+    render() {
+        console.log('OPTOiofuioui',this.state.data);
+        // var options;
+        if(this.state.data){
+            // options = this.state.data.map(function(elem, index){
+            //     <option key= {elem.id} value={elem.category_name} selected={index == 0 ? true : false}>{elem.category_name}</option>
+            // })
+            var options = this.state.data.map(elem =>
+                <option key={elem.id}>{elem.category_name}</option>
+            )
+        
+        }else{
+            var options = ['jiji','pjoijoij'];
+        }
+        return this.state.data ? (
+            <div className="select">
+                <select name="category">
+                    {
+                        // options
+                        this.state.data.map(elem =>
+                            <option key={elem.id}>{elem.category_name}</option>
+                        )
+                        // this.state.data.map(function(elem, index){
+                        //     <option key= {elem.id} value={elem.category_name} selected={index == 0 ? true : false}>{elem.category_name}</option>
+                        // })
+
+                    }
+                </select>
+            </div>
+        ) : null
+    }
+}
+
+
+class ThreadModalForm extends Component {
+    constructor(props) {
         super(props);
         this.state = {
             subject: '',
@@ -22,7 +75,7 @@ class ThreadModalForm extends Component{
         });
     }
 
-   handleSubmit() {
+    handleSubmit() {
         console.log('Wanna create thread');
         console.log('Sending token in headers with POST REquest')
 
@@ -39,7 +92,7 @@ class ThreadModalForm extends Component{
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data',
-                'Authorization': 'Token' + ' ' + localStorage.getItem('token'),
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
             },
         };
 
@@ -56,15 +109,15 @@ class ThreadModalForm extends Component{
             console.log(response);
             window.location.href = '/';
         })
-        .catch(function (response) {
-            console.log(response);
-        });
+            .catch(function (response) {
+                console.log(response);
+            });
     }
     // action='/thread'
-    render(){
+    render() {
         return (
             <FormWrapper>
-                <form method="post" onSubmit={this.handleSubmit} action="/thread"> 
+                <form method="post" onSubmit={this.handleSubmit} action="/thread">
                     <header className="modal-card-head">
                         <p className="modal-card-title">A New Thread</p>
                         <button className="delete" aria-label="close"></button>
@@ -72,8 +125,9 @@ class ThreadModalForm extends Component{
 
                     <section className="modal-card-body">
                         <InputWrapper name="subject" type="text" placeholder="Subject" onChange={this.handleInputChange} />
-                        <textarea placeholder="Content" onChange={this.handleInputChange} className="textarea"/>
-                        {/* <InputWrapper name="content" type="text" placeholder="Content" onChange={this.handleInputChange} /> */}
+                        <textarea placeholder="Content" onChange={this.handleInputChange} className="textarea" />
+                        <Select />
+                        {/* <InputWrapper name="category" type="text" placeholder="Category" onChange={this.handleInputChange} /> */}
                     </section>
 
                     <footer className="modal-card-foot">
