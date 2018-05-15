@@ -3,7 +3,7 @@ from . import models
 def collect_threads_info():
     threads_info = []
 
-    threads = models.ThreadTheme.objects.all()
+    threads = models.ThreadTheme.objects.all().order_by('-updated_at')
 
     for theme in threads:
         thread_details = dict()
