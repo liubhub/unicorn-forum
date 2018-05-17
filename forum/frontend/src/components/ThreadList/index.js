@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import shortid from "shortid";
 
 import DataProvider from '../Thread/DataProvider';
-import MediaElement from '../Thread/Thread';
+import {MediaElement} from '../Thread';
 const uuid = shortid.generate;
 
 function Threads(elements) {

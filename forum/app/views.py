@@ -137,17 +137,21 @@ class Thread(views.APIView):
         else:
             return HttpResponse(status=400)
     
-    def get(self, request, thread_id):
+    def get(self, request, thread_id, data=False):
 
-        thread_id = int(thread_id.split('t')[1])
+        if(not data):
+            return render(request, 'frontend/thread.html')
 
-        theme = models.ThreadTheme.objects.filter(entity_id=thread_id).first()
-        if theme:
+        else:
+            thread_id = int(thread_id.split('t')[1])
+
+            theme = models.ThreadTheme.objects.filter(entity_id=thread_id).first()
+            if theme:
   
-            info = get_thread(theme)
+                info = get_thread(theme)
 
-            return JsonResponse(info, safe=False)
-            
+                return JsonResponse(info, safe=False)
+
         return HttpResponse(status=400)
 
 

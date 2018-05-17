@@ -3,18 +3,18 @@ import PropTypes from "prop-types";
 import mui from 'material-ui';
 
 import ForumIcon from 'react-material-icons/icons/communication/forum';
-import './thread.css';
+import '../thread.css';
 import axios from 'axios';
 
-let iconStyles = {
+export let iconStyles = {
   fontSize: '12px',
   color: 'grey'
 }
 // const noneAvatarUrl = "https://bulma.io/images/placeholders/128x128.png";
-const noneAvatarUrl = '/static/avatar/avatar.png';
-const max_thread_content = 90;
+export const noneAvatarUrl = '/static/avatar/avatar.png';
+export const max_thread_content = 90;
 
-function dateDifference(date) {
+export function dateDifference(date) {
   if (!date) {
     return '';
   }
@@ -24,7 +24,7 @@ function dateDifference(date) {
 }
 
 
-class MediaElement extends Component {
+export class MediaElement extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -38,20 +38,7 @@ class MediaElement extends Component {
     
     const thread_url = '/thread/' + event.currentTarget.id.toString();
 
-    fetch(thread_url)
-      .then(response => {
-        if (response.status !== 200) {
-          this.setState({ errFetchData: true })
-        } else {
-          return response.json();
-        }
-      }).then(data => {
-        console.log(data);
-        window.location.href = thread_url;
-      })
-      .catch(err => {
-        console.warn(err);
-      });
+    window.location.href = thread_url;
 
   }
 
@@ -146,4 +133,4 @@ MediaElement.propTypes = {
   thread: PropTypes.object.isRequired
 };
 
-export default MediaElement;
+// export default MediaElement;
