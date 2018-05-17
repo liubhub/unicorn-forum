@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack --mode development ./forum/frontend/src/thread_comments.js --output ./forum/frontend/static/frontend/thread_comments.js;webpack --mode development ./forum/frontend/src/threads.js --output ./forum/frontend/static/frontend/threads.js",
+    "dev": "webpack --mode development ./forum/frontend/src/thread_comments.js --output ./forum/frontend/static/frontend/thread_comments.js",
     "build": "webpack --mode production ./forum/frontend/src/index.js --output ./forum/frontend/static/frontend/main.js"
   },
   "repository": {
@@ -33,6 +33,7 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "shortid": "^2.2.8",
+    "url": "^0.11.0",
     "webpack": "^4.6.0",
     "webpack-cli": "^2.0.14"
   },

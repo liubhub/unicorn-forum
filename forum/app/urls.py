@@ -7,16 +7,24 @@ urlpatterns = [
     path('api/threads/', views.threads_view),
     path('register/', views.register),
     path('login/',views.Login.as_view()),
-    path('thread/', views.Thread.as_view()),
-    url(r'thread/(?P<thread_id>t[0-9]+)', views.Thread.as_view()),
 
+    path('thread/', views.Thread.as_view()),
+
+    url(r'^thread/(?P<thread_id>t[0-9]+)/$', views.Thread.as_view()),
+    url(r'^thread/(?P<thread_id>t[0-9]+)((?P<data>.*/$))', views.Thread.as_view()),
+
+    # url(r'thread/(?P<thread_id>t[0-9]+)((?P<data>[True]+)/)?$', views.Thread.as_view()),
+
+    # url(r'thread/(?P<thread_id>t[0-9]+)', views.Thread.as_view()),
+    # url(r'thread/(?P<thread_id>t[0-9]+)/(?P<data>[true]+)', views.Thread.as_view()),
 
     # активация профиля пользователя
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.activate, name='activate'),
     path('verify/',views.verify)
 ]
 
-
+# url(r'^so/(?P<required>\d+)/$', 'myapp.so', name='something'),
+# url(r'^so/(?P<required>\d+)/(?P<optional>.*)/$', 'myapp.so', name='something_else'),
 
 # re_path(r'^activate/(?P<uidb64>\w+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
     #     views.activate,name='activate'),

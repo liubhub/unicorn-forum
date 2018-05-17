@@ -139,6 +139,8 @@ class Thread(views.APIView):
     
     def get(self, request, thread_id, data=False):
 
+        print('Params: ',data, thread_id)
+        
         if(not data):
             return render(request, 'frontend/thread.html')
 

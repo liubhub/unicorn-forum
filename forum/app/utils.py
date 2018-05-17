@@ -11,11 +11,11 @@ def get_thread(theme):
     for c in thread_comments:
         comment_meta = dict()
         
-        comment_meta['comment_date']= c.created_at
-        comment_meta['comment_content'] = models.Comment.objects.filter(entity_id=c.comment_id).first().content
-        comment_meta['author'] = models.User.objects.filter(id = c.creator_id).first().username
+        comment_meta['creation_date']= c.created_at
+        comment_meta['content'] = models.Comment.objects.filter(entity_id=c.comment_id).first().content
+        comment_meta['author_username'] = models.User.objects.filter(id = c.creator_id).first().username
         comment_meta['author_avatar'] = str(models.Profile.objects.filter(user_id=c.creator_id).first().avatar)
-        comment_meta['author_replies'] = len(models.CommentMeta.objects.filter(creator_id=c.creator_id))
+        comment_meta['num_of_replies'] = len(models.CommentMeta.objects.filter(creator_id=c.creator_id))
         comments.append(comment_meta)
 
     category = models.Category.objects.filter(id = theme.category_id).first().category_name
