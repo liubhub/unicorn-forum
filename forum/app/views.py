@@ -26,7 +26,7 @@ from django.core.mail import EmailMessage
 from . import models
 from .forms import SignupForm
 from .tokens import account_activation_token
-from .utils import collect_threads_info
+from .utils import collect_threads_info, get_thread
 from app.models import Category
 from app.serializers import CategorySerializer
 
@@ -59,12 +59,6 @@ class Login(views.APIView):
             return Response({'Error': "Invalid username/password"}, status="400")
             # return JsonResponse({'Error': "Invalid credentials"},status=400)
 
-# TODO: к чему его коннектить
-# Это уже для проверки jwt когда чел авторизован,
-# например, для создания поста отправки сообщения
-# отправки комментария
-
-# def autho
 
 class TokenAuthentication(BaseAuthentication):
     model = None
@@ -125,29 +119,35 @@ class TokenAuthentication(BaseAuthentication):
 
 
 
-@csrf_exempt
-def create_thread(request):
-    if request.method != 'POST':
-        return HttpResponse(status=403);
-    Auth = TokenAuthentication()
-    res = Auth.authenticate(request)
-    if res:
-        user, token = res
-        # Записать в треды
-        # category subject content user
-        print(request.POST)
-
-        category = models.Category.objects.get(category_name = request.POST.get('category'))
-        if category:
-            entity = models.Entity()
-            entity.save()
-            thread = models.ThreadTheme(entity=entity, subject=request.POST.get('subject'),\
-                content=request.POST.get('content'), user = user, category = category)
-            thread.save()
-            return HttpResponse(status=200)
+class Thread(views.APIView):
+    @csrf_exempt
+    def post(self, request):
+        Auth = TokenAuthentication()
+        res = Auth.authenticate(request)
+        if res:
+            user, token = res
+            category = models.Category.objects.get(category_name = request.POST.get('category'))
+            if category:
+                entity = models.Entity()
+                entity.save()
+                thread = models.ThreadTheme(entity=entity, subject=request.POST.get('subject'),\
+                    content=request.POST.get('content'), user = user, category = category)
+                thread.save()
+                return HttpResponse(status=200)
         else:
             return HttpResponse(status=400)
-    else:
+    
+    def get(self, request, thread_id):
+
+        thread_id = int(thread_id.split('t')[1])
+
+        theme = models.ThreadTheme.objects.filter(entity_id=thread_id).first()
+        if theme:
+  
+            info = get_thread(theme)
+
+            return JsonResponse(info, safe=False)
+            
         return HttpResponse(status=400)
 
 
