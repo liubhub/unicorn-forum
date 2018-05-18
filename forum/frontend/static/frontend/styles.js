@@ -79,7 +79,18 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\n__webpack_require__(/*! ../static/css/style.css */ \"./forum/frontend/static/css/style.css\");\n\n//# sourceURL=webpack:///./forum/frontend/src/styles.js?");
+eval("\n\n__webpack_require__(/*! ../static/css/style.css */ \"./forum/frontend/static/css/style.css\");\n\n__webpack_require__(/*! ../static/css/hero.css */ \"./forum/frontend/static/css/hero.css\");\n\n//# sourceURL=webpack:///./forum/frontend/src/styles.js?");
+
+/***/ }),
+
+/***/ "./forum/frontend/static/css/hero.css":
+/*!********************************************!*\
+  !*** ./forum/frontend/static/css/hero.css ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("\nvar content = __webpack_require__(/*! !../../../../node_modules/css-loader!./hero.css */ \"./node_modules/css-loader/index.js!./forum/frontend/static/css/hero.css\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ \"./node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./forum/frontend/static/css/hero.css?");
 
 /***/ }),
 
@@ -91,6 +102,17 @@ eval("\n\n__webpack_require__(/*! ../static/css/style.css */ \"./forum/frontend/
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("\nvar content = __webpack_require__(/*! !../../../../node_modules/css-loader!./style.css */ \"./node_modules/css-loader/index.js!./forum/frontend/static/css/style.css\");\n\nif(typeof content === 'string') content = [[module.i, content, '']];\n\nvar transform;\nvar insertInto;\n\n\n\nvar options = {\"hmr\":true}\n\noptions.transform = transform\noptions.insertInto = undefined;\n\nvar update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ \"./node_modules/style-loader/lib/addStyles.js\")(content, options);\n\nif(content.locals) module.exports = content.locals;\n\nif(false) {}\n\n//# sourceURL=webpack:///./forum/frontend/static/css/style.css?");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./forum/frontend/static/css/hero.css":
+/*!**********************************************************************!*\
+  !*** ./node_modules/css-loader!./forum/frontend/static/css/hero.css ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \".hero, .grabient{\\n    background-color: #FEE140;\\n    background-image: linear-gradient(90deg, #FEE140 0%, #FA709A 100%);\\n}\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./forum/frontend/static/css/hero.css?./node_modules/css-loader");
 
 /***/ }),
 
