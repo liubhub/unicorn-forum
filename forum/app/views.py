@@ -161,10 +161,11 @@ def comment_thread(request):
     if request.method == "POST":
         print(request.POST)
 
+        # оптимальность зашкаливает
         # проверить авторизацию
         # создать ентити
         # создать коммент
-        #  создать коммент мета
+        # создать коммент мета
         # достать из бд стандартной функцией
         # вернуть джсоном
 
@@ -195,6 +196,26 @@ def comment_thread(request):
         return HttpResponse(status=200)
     else:
         return HttpResponse(status=403)
+
+
+def users_template(request):
+    return render(request, 'frontend/users.html');
+
+def users_info(request):
+
+    users = models.User.objects.all()
+    
+    info = []
+    for user in users:
+        d = dict()
+        d['username'] = user.username
+        d['num_of_comments'] = len(models.CommentMeta.objects.filter(creator_id = user.id))
+        d['num_of_threads'] = len(models.ThreadTheme.objects.filter(user_id=user.id))
+        info.append(d)
+
+    return JsonResponse(info, safe=False)
+
+
 
 def threads_view(request):
     # /api/threads
