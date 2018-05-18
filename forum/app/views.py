@@ -209,6 +209,7 @@ def users_info(request):
     for user in users:
         d = dict()
         d['username'] = user.username
+        d['avatar'] = str(models.Profile.objects.filter(user=user).first().avatar)
         d['num_of_comments'] = len(models.CommentMeta.objects.filter(creator_id = user.id))
         d['num_of_threads'] = len(models.ThreadTheme.objects.filter(user_id=user.id))
         info.append(d)
