@@ -13,6 +13,8 @@ urlpatterns = [
     url(r'^thread/(?P<thread_id>t[0-9]+)/$', views.Thread.as_view()),
     url(r'^thread/(?P<thread_id>t[0-9]+)((?P<data>.*/$))', views.Thread.as_view()),
 
+
+    path('comment/', views.comment_thread),
     # url(r'thread/(?P<thread_id>t[0-9]+)((?P<data>[True]+)/)?$', views.Thread.as_view()),
 
     # url(r'thread/(?P<thread_id>t[0-9]+)', views.Thread.as_view()),

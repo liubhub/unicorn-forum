@@ -156,6 +156,45 @@ class Thread(views.APIView):
 
         return HttpResponse(status=400)
 
+@csrf_exempt
+def comment_thread(request):
+    if request.method == "POST":
+        print(request.POST)
+
+        # проверить авторизацию
+        # создать ентити
+        # создать коммент
+        #  создать коммент мета
+        # достать из бд стандартной функцией
+        # вернуть джсоном
+
+        Auth = TokenAuthentication()
+        res = Auth.authenticate(request)
+        if res:
+            user, token = res
+
+            thread_id = int(request.POST.get('thread_id').split('t')[1])
+
+            entity = models.Entity()
+            entity.save()
+
+            comment = models.Comment(entity=entity, content=request.POST.get('comment'))
+            comment.save()
+
+            theme = models.ThreadTheme.objects.filter(entity_id=thread_id).first()
+
+            if theme:
+                comment_meta = models.CommentMeta(comment=comment,creator=user,thread=theme)
+                comment_meta.save()
+  
+                info = get_thread(theme)
+
+                return JsonResponse(info, safe=False)
+
+
+        return HttpResponse(status=200)
+    else:
+        return HttpResponse(status=403)
 
 def threads_view(request):
     # /api/threads
