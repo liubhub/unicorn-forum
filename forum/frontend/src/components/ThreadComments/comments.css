@@ -1,0 +1,16 @@
+.media.thread-comments{
+    border: 1px solid lightgrey;
+    padding: 1em;
+}
+
+.media.thread-comments .media-content .subject.details strong{
+    font-size: 2em;
+}
+
+.media.thread-comments .media-content .subject.details p.details{
+    font-size: 1.1em;
+}
+
+.author-username{
+    padding-top: 3em;
+}

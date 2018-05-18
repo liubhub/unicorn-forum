@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 import socket
 from .base import get_env_variable
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -141,6 +142,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = '/home/lovely/Documents/projects/unicorn_forum/forum/frontend/static'
+# STATIC_ROOT = '/home/django/innovindex/pubmed/static/'
+
 
 # this one is for uploads (avatar etc.)
 MEDIA_URL = '/media/'

@@ -1,73 +1,118 @@
 import React, { Component } from 'react';
 import mui from 'material-ui';
 import ForumIcon from 'react-material-icons/icons/communication/forum';
+import shortid from 'shortid';
 
+import DataProvider from '../Thread/DataProvider';
 import '../thread.css';
+import './comments.css';
 import { dateDifference, noneAvatarUrl, max_thread_content, iconStyles } from '../Thread';
 
+const uuid = shortid.generate;
 
-const Comment = ({comment}) => 
-  !comment ? ( <div> Nothing to show </div> ) : (
-    <article className="media" >
-    <figure className="media-left">
-      <p className="image is-64x64">
-        <img src={comment.author_avatar || noneAvatarUrl} />
-      </p>
-    </figure>
+const Comment = ({ comment }) =>
+    !comment ? (<div> Nothing to show </div>) : (
+        <article className="media thread-comments" >
+            <figure className="media-left">
 
-    <div className="media-content">
-      <div className="content">
-        <div className="subject details">
-          <strong>{comment.subject}</strong> <small>{'@'+comment.author_username.toString()+' '}</small>
-          <small>{dateDifference(comment.creation_date) == 'day' ? 'today' : dateDifference(comment.creation_date)}</small>
-          <p className="details">{comment.content.length > max_comment_content ? comment.content.slice(0,max_comment_content) : comment.content}</p>
-          <small className="category">{comment.category}</small>
-          <ForumIcon style={iconStyles}/>
-          <small className="num-of-replies">{comment.number_of_replies.toString() + " replies"}</small>
-        </div>
-      </div>
-    </div>
+                <p className={comment.is_comment ? "image is-96x96" : "image is-128x128"}>
+                    <img src={comment.author_avatar || noneAvatarUrl} />
+                </p>
+                <div className="author-username">
+                    <small>{'@' + comment.author_username.toString() + ' '}</small>
+                </div>
 
-    { comment.number_of_replies > 0 ? (
-    <div className="media-right is-hidden-mobile ">
-    <figure className="author-of-comment is-pulled-left "> 
-      <p className="image is-64x64">
-        <img src={comment.last_commented_avatar || noneAvatarUrl}/>
-      </p>
-   </figure>
-  <div className="author-of-comment is-pulled-right">
-    <p><strong>{comment.last_commented_username}</strong></p>
-    <p><small>{dateDifference(comment.last_commented_date)}</small></p>
-  </div>
-  </div>) : ''
+            </figure>
 
+            <div className="media-content">
+                <div className="content">
+                    <div className="subject details">
+                        <strong>{comment.subject}</strong>
+                        <div className="is-pulled-right">
+                            <small>{dateDifference(comment.creation_date) == 'day' ? 'today' : dateDifference(comment.creation_date)}</small>
+                        </div>
+
+                        <p className="details">{comment.content}</p>
+
+                        {comment.is_comment ? null : <small className="category">{comment.category}</small>}
+
+                    </div>
+                </div>
+            </div>
+        </article>
+    );
+
+
+
+function CommentMapper(props) {
+    const data = props.data;
+    var res = [];
+    if (data.comments.length > 0) {
+        var elements = data.comments;
+        res.push(<Comment comment={data} key={uuid()} />)
+
+        for (let i = 0; i < elements.length; i++) {
+            res.push(<Comment comment={elements[i]} key={uuid()} />)
+        }
+    } else {
+        res = <Comment comment={data} key={data.id} />
+    }
+    if (props.isLoggedIn) {
+        res.push(<CommentForm key={uuid()}/>)
+    }
+    return (<div>{res}</div>)
+}
+
+class CommentForm extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    </article>
-  );
+    handleChange(event){
+        
+    }
+
+    handleSubmit(event){
+
+    }
+    
+    render() {
+        return (
+            <article className="media thread-comments" >
+
+                <figure className="media-left">
+                    <p className="image is-96x96">
+                        <img src={noneAvatarUrl} />
+                    </p>
+                </figure>
+
+                <div className="media-content">
+                    <div className="content">
+                        <div className="subject details">
+
+                            {/* форма */}
+                            <form className="form">
+                                <div className="field">
+                                    <textarea className="textarea" placeholder="Write a comment..."></textarea>
+                                </div>
+                                <div className="field is-pulled-right">
+                                    <button className="button is-link" type="submit" onClick={this.handleSubmit}>Submit</button>
+                                </div>
+                            </form>
+                           
 
 
-// class CommentMapper extends Component{
-//     constructor(props){
-//         super(props)
-//     }
+                        </div>
+                    </div>
+                </div>
 
-//     componentDidMount(){
-//         console.log(this.props.data)
-//     }
 
-//     render(){
-//         return (
-//             this.props.data.map(elem => <Comment comment={elem}/>)
-//         )
-//     }
-// }
-
-function CommentMapper(props){
-    console.log('Function props', props.data);
-    const els = props.data.map(function(el){
-        return <p>ololo</p>
-    })
+            </article>
+        )
+    }
 }
 
 
@@ -78,21 +123,15 @@ class Comments extends Component {
         this.state = {
             data: null,
             fetching: false,
-            err: false
+            err: false,
         }
-        this.handleLoad = this.handleLoad.bind(this);
     }
 
-    componentDidMount() {
-        window.addEventListener('load', this.handleLoad);
-    }
-
-    handleLoad(event) {
-        console.log('Getting data...')
+    componentWillMount() {
 
         const url = window.location.href + '/True';
 
-        this.setState({fetching: true});
+        this.setState({ fetching: true });
 
         fetch(url)
             .then(response => {
@@ -102,8 +141,8 @@ class Comments extends Component {
                     return response.json();
                 }
             }).then(data => {
-                this.setState({data: data, fetching: false});
-                console.log(this.state.data);
+                this.setState({ data: data, fetching: false });
+                console.log('Loaded: ', this.state.data, (new Date()).toUTCString());
             })
             .catch(err => {
                 console.warn(err);
@@ -114,11 +153,11 @@ class Comments extends Component {
     render() {
         return (
 
-            this.state.fetching ? 
-                <a className="button is-loading">Loading</a>   
-            : <CommentMapper data={this.state.data}/>
+            this.state.fetching ?
+                <a className="button is-loading">Loading</a>
+                : <CommentMapper data={this.state.data} isLoggedIn={true} />
 
-    
+
         )
     }
 }

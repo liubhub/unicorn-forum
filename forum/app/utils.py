@@ -9,13 +9,15 @@ def get_thread(theme):
 
     comments = []
     for c in thread_comments:
+
         comment_meta = dict()
         
         comment_meta['creation_date']= c.created_at
         comment_meta['content'] = models.Comment.objects.filter(entity_id=c.comment_id).first().content
         comment_meta['author_username'] = models.User.objects.filter(id = c.creator_id).first().username
         comment_meta['author_avatar'] = str(models.Profile.objects.filter(user_id=c.creator_id).first().avatar)
-        comment_meta['num_of_replies'] = len(models.CommentMeta.objects.filter(creator_id=c.creator_id))
+        comment_meta['number_of_replies'] = len(models.CommentMeta.objects.filter(creator_id=c.creator_id))
+        comment_meta['is_comment'] = True
         comments.append(comment_meta)
 
     category = models.Category.objects.filter(id = theme.category_id).first().category_name
@@ -43,7 +45,7 @@ def get_thread(theme):
     thread_details['creation_date'] = theme.created_at
     thread_details['subject'] = theme.subject
     thread_details['content'] = theme.content
-
+    thread_details['is_comment'] = False
     thread_details['comments'] = comments
     return thread_details
 
