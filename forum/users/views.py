@@ -13,6 +13,8 @@ from rest_framework import status, exceptions
 from rest_framework.authentication import get_authorization_header, BaseAuthentication
 from rest_framework import views
 
+from django.http import HttpResponse
+
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
