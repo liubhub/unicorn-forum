@@ -102,8 +102,8 @@ class ThreadModalForm extends Component {
     }
 
     onCloseModal(event){
-        // event.preventDefault();
-        // event.stopPropagation();
+        event.preventDefault();
+        document.querySelector('.modal.is-active').classList.remove('is-active');
     }
 
     render() {
