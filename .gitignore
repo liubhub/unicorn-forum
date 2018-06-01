@@ -4,6 +4,12 @@ lib/*
 include/*
 bin/*
 forum/forum/__pycache__/*
+forum/app/__pycache__/*
+forum/api/__pycache__/*
+forum/likes/__pycache__/*
+forum/chat/__pycache__/*
+forum/likes/__pycache__/*
+forum/users/__pycache__/*
 *.pyc
 .vscode/*
 node_modules/*
