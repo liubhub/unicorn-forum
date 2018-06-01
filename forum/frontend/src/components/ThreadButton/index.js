@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ThreadModalForm from './ThreadModal';
+import {render} from 'react-dom'
 
 class ThreadButton extends Component {
     constructor(props) {
@@ -20,6 +21,7 @@ class ThreadButton extends Component {
     }
 
     render() {
+        console.log('Thread button is rrendering')
         return localStorage.getItem('token') ? (<div className="control">
             <div className="button is-primary">
                 <div onClick={this.handleClick}>Create Thread</div>
@@ -38,3 +40,4 @@ class ThreadButton extends Component {
     }
 }
 export default ThreadButton;
+render(<ThreadButton/>, document.getElementById('createThread'));

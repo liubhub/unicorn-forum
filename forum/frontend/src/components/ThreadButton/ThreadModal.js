@@ -15,7 +15,7 @@ class Select extends Component {
     }
 
     componentWillMount() {
-        const url = '/api/category';
+        const url = '/api/categories';
         fetch(url)
           .then(response => {
             return response.json();
@@ -48,6 +48,7 @@ class ThreadModalForm extends Component {
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onCloseModal = this.onCloseModal.bind(this);
     }
 
     handleInputChange(event) {
@@ -59,7 +60,7 @@ class ThreadModalForm extends Component {
         });
     }
 
-    handleSubmit() {
+    handleSubmit(event) {
         console.log('Wanna create thread');
         console.log('Sending token in headers with POST REquest')
 
@@ -100,13 +101,18 @@ class ThreadModalForm extends Component {
             });
     }
 
+    onCloseModal(event){
+        // event.preventDefault();
+        // event.stopPropagation();
+    }
+
     render() {
         return (
             <FormWrapper>
                 <form method="post" onSubmit={this.handleSubmit} action="/thread">
                     <header className="modal-card-head">
                         <p className="modal-card-title">A New Thread</p>
-                        <button className="delete" aria-label="close"></button>
+                        <button className="delete" aria-label="close" onClick={this.onCloseModal}></button>
                     </header>
 
                     <section className="modal-card-body">
