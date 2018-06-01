@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
    'frontend',
-    'app'
+    'app',
+    'api',
+    'users',
+    'chat',
+    'likes'
 ]
 
 MIDDLEWARE = [
@@ -158,14 +162,14 @@ LOGIN_REDIRECT_URL = '/'
 
 # CSRF_COOKIE_NAME = 'X-CSRFToken'#'X-CSRFToken' # "XCSRF-TOKEN"
 
-EMAIL_USE_TLS = True
-# EMAIL_HOST = 'smtp.yahoo.com'
-EMAIL_HOST_USER = 'lihub.dev@gmail.com'#'konstantin_geev@yahoo.com'
-EMAIL_HOST_PASSWORD = 'edinorozhek1996pony'
-EMAIL_PORT = 587
-EMAIL_HOST = socket.gethostbyname('smtp.gmail.com')
+# EMAIL_USE_TLS = True
+# # EMAIL_HOST = 'smtp.yahoo.com'
+# EMAIL_HOST_USER = 'lihub.dev@gmail.com'#'konstantin_geev@yahoo.com'
+# EMAIL_HOST_PASSWORD = 'edinorozhek1996pony'
+# EMAIL_PORT = 587
+# EMAIL_HOST = socket.gethostbyname('smtp.gmail.com')
 
-DEFAULT_FROM_EMAIL = 'Unicorn Forum Dev'
+# DEFAULT_FROM_EMAIL = 'Unicorn Forum Dev'
 # EMAIL_USE_TLS = False
 
 #  telnet smtp.xxxx.com.kh 25

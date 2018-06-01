@@ -3,18 +3,18 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    path('api/category/', views.CategoryListCreate.as_view()),
-    path('api/threads/', views.threads_view),
-    path('register/', views.register),
-    path('login/',views.Login.as_view()),
+    # path('api/category/', views.CategoryListCreate.as_view()),
+    # path('api/threads/', views.threads_view),
+    # path('register/', views.register),
+    # path('login/',views.Login.as_view()),
 
-    path('thread/', views.Thread.as_view()),
+    # path('thread/', views.Thread.as_view()),
 
     url(r'^thread/(?P<thread_id>t[0-9]+)/$', views.Thread.as_view()),
     url(r'^thread/(?P<thread_id>t[0-9]+)((?P<data>.*/$))', views.Thread.as_view()),
 
     path('users/', views.users_template),
-    path('api/users', views.users_info),
+    # path('api/users', views.users_info),
     path('comment/', views.comment_thread),
     # url(r'thread/(?P<thread_id>t[0-9]+)((?P<data>[True]+)/)?$', views.Thread.as_view()),
 
@@ -22,8 +22,8 @@ urlpatterns = [
     # url(r'thread/(?P<thread_id>t[0-9]+)/(?P<data>[true]+)', views.Thread.as_view()),
 
     # активация профиля пользователя
-    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.activate, name='activate'),
-    path('verify/',views.verify)
+    # url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.activate, name='activate'),
+    # path('verify/',views.verify)
 ]
 
 # url(r'^so/(?P<required>\d+)/$', 'myapp.so', name='something'),
