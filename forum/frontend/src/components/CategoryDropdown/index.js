@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {render} from 'react-dom'
 
 class CategoryButton extends Component {
 
@@ -37,7 +38,7 @@ class CategoryButton extends Component {
         if (!this.state.data) {
 
 
-            const url = '/api/category';
+            const url = '/api/categories';
 
             axios(url)
                 .then(data => {
@@ -73,3 +74,5 @@ class CategoryButton extends Component {
 }
 
 export default CategoryButton;
+
+render(<CategoryButton/>, document.getElementById('category_dropdown'));
