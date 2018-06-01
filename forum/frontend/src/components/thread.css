@@ -14,3 +14,10 @@ p.details{
 .media{
     cursor: pointer;
 }
+.author-of-comment p{
+    max-width: 70px;
+}
+.media-right{
+    width: 185px;
+    max-width: 185px;
+}

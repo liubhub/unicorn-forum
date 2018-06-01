@@ -49,16 +49,13 @@ class ThreadSerializer(serializers.ModelSerializer):
     comments = serializers.SerializerMethodField()
     creator_avatar = serializers.SerializerMethodField()
     last_meta_data = serializers.SerializerMethodField()
-
-    # last_commented_avatar = serializers.SerializerMethodField()
-    # last_commented_username = serializers.SerializerMethodField()
     
     class Meta:
         model = models.ThreadTheme
         fields = '__all__'
     
     def get_comments(self, obj, intern=False):
-        thread_comments = models.CommentMeta.objects.filter(thread_id=obj.entity_id)
+        thread_comments = models.CommentMeta.objects.filter(thread_id=obj.entity_id).order_by('-created_at')
         if intern:
             return thread_comments
         thread_comments_serializer = CommentInfoSerializer(thread_comments, many=True)
@@ -67,9 +64,6 @@ class ThreadSerializer(serializers.ModelSerializer):
     def get_creator_avatar(self, obj):
         profile = models.Profile.objects.filter(user_id=obj.user.id).first()
         return str(profile.avatar)
-
-    # def get_last_commented_avatar(self, obj):
-    #     return 4
     
     def get_last_meta_data(self,obj):
         comments = self.get_comments(obj, intern=True)

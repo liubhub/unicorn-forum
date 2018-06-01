@@ -16,8 +16,15 @@ function Threads(elements) {
 }
 
 const ThreadList = () => (
-    <DataProvider endpoint="api/threads/" render={data =>
-        Threads(data)
+    <DataProvider endpoint="api/threads/" render={data =>{
+            data.sort(function(a,b){
+                var date_a = a.comments.length == 0 ? a.created_at : a.comments[0].created_at;
+                var date_b = b.comments.length == 0 ? b.created_at : b.comments[0].created_at;
+                return new Date(date_b) - new Date(date_a);
+            })
+
+            return Threads(data)
+        }
     }
     />
 );
