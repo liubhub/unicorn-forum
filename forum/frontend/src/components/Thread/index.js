@@ -35,7 +35,7 @@ export class MediaElement extends Component {
   }
 
   handleClick(event) {
-    
+    // TODO
     const thread_url = '/thread/' + event.currentTarget.id.toString();
 
     window.location.href = thread_url;
@@ -43,37 +43,39 @@ export class MediaElement extends Component {
   }
 
   render() {
+    console.log(this.props.thread)
+    // return null;
     return (!this.props.thread ? <div> Nothing to show </div> : (
-      <article className="media" id={'t' + this.props.thread.id.toString()} onClick={this.handleClick}>
+      <article className="media" id={'t' + this.props.thread.entity.toString()} onClick={this.handleClick}>
         <figure className="media-left">
           <p className="image is-64x64">
-            <img src={this.props.thread.author_avatar || noneAvatarUrl} />
+            <img src={this.props.thread.creator_avatar || noneAvatarUrl} />
           </p>
         </figure>
 
         <div className="media-content">
           <div className="content">
             <div className="subject details">
-              <strong>{this.props.thread.subject}</strong> <small>{'@' + this.props.thread.author_username.toString() + ' '}</small>
-              <small>{dateDifference(this.props.thread.creation_date) == 'day' ? 'today' : dateDifference(this.props.thread.creation_date)}</small>
+              <strong>{this.props.thread.subject}</strong> <small>{'@' + this.props.thread.user.username.toString() + ' '}</small>
+              <small>{dateDifference(this.props.thread.created_at) == 'day' ? 'today' : dateDifference(this.props.thread.created_at)}</small>
               <p className="details">{this.props.thread.content.length > max_thread_content ? this.props.thread.content.slice(0, max_thread_content) : this.props.thread.content}</p>
-              <small className="category">{this.props.thread.category}</small>
+              <small className="category">{this.props.thread.category.category_name}</small>
               <ForumIcon style={iconStyles} />
-              <small className="num-of-replies">{this.props.thread.number_of_replies.toString() + " replies"}</small>
+              <small className="num-of-replies">{this.props.thread.comments.length.toString() + " replies"}</small>
             </div>
           </div>
         </div>
 
-        {this.props.thread.number_of_replies > 0 ? (
+        {this.props.thread.comments.length > 0 ? (
           <div className="media-right is-hidden-mobile ">
             <figure className="author-of-comment is-pulled-left ">
               <p className="image is-64x64">
-                <img src={this.props.thread.last_commented_avatar || noneAvatarUrl} />
+                <img src={this.props.thread.last_meta_data.last_commented_avatar || noneAvatarUrl} />
               </p>
             </figure>
             <div className="author-of-comment is-pulled-right">
-              <p><strong>{this.props.thread.last_commented_username}</strong></p>
-              <p><small>{dateDifference(this.props.thread.last_commented_date)}</small></p>
+              <p><strong>{this.props.thread.last_meta_data.last_commented_username}</strong></p>
+              <p><small>{dateDifference(this.props.thread.last_meta_data.last_commented_date)}</small></p>
             </div>
           </div>) : ''
 
