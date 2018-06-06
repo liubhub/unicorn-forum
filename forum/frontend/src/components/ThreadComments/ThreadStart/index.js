@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { dateDifference, noneAvatarUrl } from '../Thread';
+import { dateDifference, noneAvatarUrl } from '../../Thread';
 
 
 const ThreadStart = ({ data }) => (

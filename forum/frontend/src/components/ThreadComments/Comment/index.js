@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { dateDifference, noneAvatarUrl } from '../Thread';
-import LikeButton from '../LikeButton';
+import { dateDifference, noneAvatarUrl } from '../../Thread';
+import LikeButton from '../../LikeButton';
 
 const Comment = ({ comment }) => (
     <article className="media thread-comments" >

@@ -7,11 +7,11 @@ import '../thread.css';
 import './comments.css';
 import { noneAvatarUrl } from '../Thread';
 import Comment from './Comment';
+import CommentForm from './CommentForm';
 import ThreadStart from './ThreadStart';
 
 const uuid = shortid.generate;
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
-
 
 
 function CommentList(comments) {
@@ -23,35 +23,6 @@ function CommentList(comments) {
     )
 }
 
-
-function CommentForm(props) {
-    // TODO: User Avatar
-    return (
-        <article className="media thread-comments" >
-            <figure className="media-left">
-                <p className="image is-96x96">
-                    <img src={props.profile_avatar} />
-                </p>
-            </figure>
-            <div className="media-content">
-                <div className="content">
-                    <div className="subject details">
-
-                        {/* форма */}
-                        <form className="form" action="/comment">
-                            <div className="field">
-                                <textarea className="textarea" placeholder="Write a comment..." name="comment" onChange={props.handleInputChange} value={props.value}></textarea>
-                            </div>
-                            <div className="field is-pulled-right">
-                                <button className="button is-link" type="submit" onClick={props.handleSubmit}>Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </article>
-    )
-}
 
 
 class Comments extends Component {
@@ -86,8 +57,6 @@ class Comments extends Component {
                 }
             }).then(data => {
                 this.setState({ data: data, fetching: false, comments: data.comments });
-                // console.log('Loaded:\n', this.state.data, (new Date()).toUTCString());
-                // console.log('Comments:\n', this.state.comments)
             })
             .catch(err => {
                 console.warn(err);
@@ -122,11 +91,8 @@ class Comments extends Component {
 
 
     handleSubmit(event) {
-        // отослать и в случае успеха прикрепить новый элемент-коммент нахуй
-        // console.log('Submiting')
         event.preventDefault();
         event.stopPropagation();
-        // console.log(this.state.comment)
         if (!this.state.comment) {
             return;
         }
@@ -141,8 +107,6 @@ class Comments extends Component {
                 'Authorization': 'Bearer ' + localStorage.getItem('token'),
             },
         };
-
-        // console.log('Sending request...');
 
         axios({
             method: 'post',
@@ -174,9 +138,7 @@ class Comments extends Component {
                 <div className="component_wrapper">
                     <ThreadStart data={this.state.data} />
 
-
                     <CommentList comments={this.state.comments} />
-
 
                     {localStorage.getItem('token') ?
                         <CommentForm handleInputChange={this.handleInputChange}
@@ -194,30 +156,3 @@ class Comments extends Component {
 }
 
 export default Comments;
-
-
-
-
-
-
-
-// function CommentMapper(props) {
-//     const data = props.data;
-//     var res = [];
-//     data.is_comment = false;
-//     res.push(<Comment comment={data} key={uuid()}/>);
-//     if (data.comments.length > 0) {
-//         var elements = data.comments;
-//         res.push(<Comment comment={data} key={uuid()} />)
-
-//         for (let i = 0; i < elements.length; i++) {
-//             res.push(<Comment comment={elements[i]} key={uuid()} />)
-//         }
-//     } else {
-//         res.push(<Comment comment={data} key={data.entity} />);
-//     }
-//     if (props.isLoggedIn) {
-//         res.push(<CommentForm key={uuid()}/>)
-//     }
-//     return (<div>{res}</div>)
-// }
