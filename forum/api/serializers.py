@@ -7,9 +7,17 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
+
+    avatar = serializers.SerializerMethodField()
+
+    def get_avatar(self, obj):
+        profile = models.Profile.objects.filter(user = obj).first()
+        avatar = str(profile.avatar)
+        return avatar
+
     class Meta:
         model = models.User
-        fields = ['id','first_name','last_name','username']
+        fields = ['id','first_name','last_name','username','avatar']
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -48,7 +56,7 @@ class ThreadSerializer(serializers.ModelSerializer):
     user = UserSerializer()
 
     comments = serializers.SerializerMethodField()
-    creator_avatar = serializers.SerializerMethodField()
+    # creator_avatar = serializers.SerializerMethodField()
     last_meta_data = serializers.SerializerMethodField()
     
     class Meta:
@@ -62,9 +70,9 @@ class ThreadSerializer(serializers.ModelSerializer):
         thread_comments_serializer = CommentInfoSerializer(thread_comments, many=True)
         return thread_comments_serializer.data
 
-    def get_creator_avatar(self, obj):
-        profile = models.Profile.objects.filter(user_id=obj.user.id).first()
-        return str(profile.avatar)
+    # def get_creator_avatar(self, obj):
+    #     profile = models.Profile.objects.filter(user_id=obj.user.id).first()
+    #     return str(profile.avatar)
     
     def get_last_meta_data(self,obj):
         comments = self.get_comments(obj, intern=True)
