@@ -20,3 +20,14 @@
 .author-username{
     padding-top: 3em;
 }
+.page-numbers{
+    text-align: center;
+}
+.page-numbers li{
+    border-bottom: 1px solid deepskyblue;
+    display: inline-block;
+    margin-right: 20px;
+    cursor: pointer;
+    color: deepskyblue;
+    font-size: 1.2em;
+}

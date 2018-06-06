@@ -35,11 +35,15 @@ class CommentsApp extends Component {
             err: false, // TODO: this error
             comments: [],
             comment: '',
-            user: null
+            user: null,
+
+            // commentPerPage: 7,
+            currentPage: 1,
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handlePagination = this.handlePagination.bind(this);
     }
 
     componentWillMount() {
@@ -79,6 +83,11 @@ class CommentsApp extends Component {
         console.log(this.state.user)
     }
 
+    handlePagination(event){
+        this.setState({
+            currentPage: Number(event.target.id)
+        });
+    }
 
     handleInputChange(event) {
         var value = event.target.value;
@@ -130,14 +139,49 @@ class CommentsApp extends Component {
     }
 
 
+
+
+
     render() {
+
+        // const { comments, currentPage, commentsPerPage } = this.state;
+
+        const commentsPerPage = 5;
+
+        const indexOfLast = this.state.currentPage * commentsPerPage;
+        const indexOfFirst = indexOfLast - commentsPerPage;
+        const currentComments = this.state.comments.slice(indexOfFirst, indexOfLast);
+
+
+        const renderComments =  <CommentList comments={currentComments} />
+
+        const pageNumbers = [];
+        for (let i = 1; i <= Math.ceil(this.state.comments.length / commentsPerPage); i++) {
+          pageNumbers.push(i);
+        }
+
+
+        const renderPageNumbers = pageNumbers.map(number => {
+            return (
+              <li
+                key={number}
+                id={number}
+                onClick={this.handlePagination}
+              >
+                {number}
+              </li>
+            );
+          });
+
         return (
 
             this.state.fetching ? <a className="button is-loading">Loading</a> : (
                 <div className="component_wrapper">
                     <ThreadStart data={this.state.data} />
 
-                    <CommentList comments={this.state.comments} />
+                    {/* <CommentList comments={renderComments} /> */}
+
+                    {renderComments}
 
                     {localStorage.getItem('token') ?
                         <CommentForm handleInputChange={this.handleInputChange}
@@ -146,6 +190,11 @@ class CommentsApp extends Component {
                             value={this.state.comment}
 
                         /> : null}
+
+
+                        <ul className="page-numbers">
+                            {renderPageNumbers}
+                        </ul>
                 </div>
 
             )
