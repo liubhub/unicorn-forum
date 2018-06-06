@@ -15,7 +15,7 @@ class LikeButton extends Component{
         return (
          <div className="like-wrapper"> 
             <small className="num-of-likes">2</small>
-            <span className="heart"></span>
+            <span className={ this.props.theme ? "heart main-thread" : "heart"}></span>
         </div>
         )
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { dateDifference, noneAvatarUrl } from '../../Thread';
+import LikeButton from '../../LikeButton';
 
 
 const ThreadStart = ({ data }) => (
@@ -25,6 +26,8 @@ const ThreadStart = ({ data }) => (
                 </div>
             </div>
         </div>
+
+        <LikeButton theme/>
     </article>
 );
 

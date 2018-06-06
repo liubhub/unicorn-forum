@@ -20,11 +20,19 @@ div.like-wrapper{
   width: 20px;
   top: 5px;
   cursor: pointer;
+  -webkit-filter: opacity(.6);
+  filter: opacity(.6);
 }
 .heart.isLiked{
+  -webkit-filter: opacity(1);
+  filter: opacity(1);
+}
+.heart.main-thread{
   height: 25px;
-  widows: 25px;
+  width: 25px;
 }
 .heart:hover{
   transform:scale(1.2);
+  -webkit-filter: opacity(1);
+  filter: opacity(1);
 }
