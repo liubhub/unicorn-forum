@@ -48,7 +48,27 @@ class Thread(views.APIView):
 
         return HttpResponse(status=400)
 
- 
+class UserProfile(views.APIView):
+    # TODO: Нужно как-то ограничить эти действия... А ВСЁ БЛЯ И ТАК ОГРАНИЧЕНО ХАХА ТОКЕН 
+    def get(self, request):
+
+        Auth = TokenAuthentication()
+        res = Auth.authenticate(request)
+        if res:
+            user, token = res
+            
+            serializer = serializers.UserSerializer(user)
+
+            return JsonResponse(serializer.data)
+        else:
+            return HttpResponse(status=400)
+
+
+    def post(self, request):
+        pass
+    
+
+
 @csrf_exempt
 def comment_thread(request):
     if request.method == "POST":
@@ -81,14 +101,16 @@ def comment_thread(request):
                 comment_meta = models.CommentMeta(comment=comment,creator=user,thread=theme)
                 comment_meta.save()
   
-                info = get_thread(theme)
+                # info = get_thread(theme)
 
-                return JsonResponse(info, safe=False)
+                serializer = serializers.CommentInfoSerializer(comment_meta)
+
+                return JsonResponse(serializer.data)
 
 
-        return HttpResponse(status=200)
-    else:
         return HttpResponse(status=403)
+    else:
+        return HttpResponse(status=405)
 
 
 def users_template(request):
