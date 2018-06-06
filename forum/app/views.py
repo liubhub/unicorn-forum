@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 
 from . import models
 from users.views import TokenAuthentication
+from api import serializers
 
 class Thread(views.APIView):
     @csrf_exempt
@@ -41,9 +42,9 @@ class Thread(views.APIView):
             theme = models.ThreadTheme.objects.filter(entity_id=thread_id).first()
             if theme:
   
-                info = get_thread(theme)
-
-                return JsonResponse(info, safe=False)
+                serializer = serializers.ThreadSerializer(theme)
+                
+                return JsonResponse(serializer.data)
 
         return HttpResponse(status=400)
 

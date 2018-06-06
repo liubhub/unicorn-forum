@@ -8,7 +8,7 @@ urlpatterns = [
     # path('register/', views.register),
     # path('login/',views.Login.as_view()),
 
-    # path('thread/', views.Thread.as_view()),
+    path('thread/', views.Thread.as_view()),
 
     url(r'^thread/(?P<thread_id>t[0-9]+)/$', views.Thread.as_view()),
     url(r'^thread/(?P<thread_id>t[0-9]+)((?P<data>.*/$))', views.Thread.as_view()),
