@@ -21,28 +21,6 @@ function CommentList(comments, user) {
     return comment_list;
 }
 
-// class CommentList extends Component{
-//     constructor(props){
-//         super(props);
-//         // console.log(this.props);
-//         this.state = {
-
-//         }
-//     }
-
-//     render(){
-//         // console.log('User in comment list class:', this.props.user);
-//         var comment_list = this.props.comments.map(function (elem) {
-//             return <Comment comment={elem} key={uuid()} user={this.props.user}/>
-//         })
-
-//         return (
-//             <div>{comment_list}</div>
-//         )
-//         // return null;
-//     }
-// }
-
 class CommentsApp extends Component {
     constructor(props) {
         super(props);
