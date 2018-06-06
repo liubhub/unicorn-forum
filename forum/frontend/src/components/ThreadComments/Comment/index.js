@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { dateDifference, noneAvatarUrl } from '../../Thread';
 import LikeButton from '../../LikeButton';
 
-const Comment = ({ comment }) => (
+const Comment = ({ comment, user }) => (
     <article className="media thread-comments" >
         <figure className="media-left">
             <p className="image is-96x96">
@@ -25,7 +25,7 @@ const Comment = ({ comment }) => (
             </div>
         </div>
 
-    <LikeButton/>
+    <LikeButton user={user}/>
     </article>
 );
 

@@ -14,16 +14,34 @@ const uuid = shortid.generate;
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
 
-function CommentList(comments) {
-    var comment_list = comments.comments.map(function (elem) {
-        return <Comment comment={elem} key={uuid()} />
+function CommentList(comments, user) {
+    var comment_list = comments.map(function (elem) {
+        return <Comment comment={elem} key={uuid()} user={user}/>
     })
-    return (
-        <div>{comment_list}</div>
-    )
+    return comment_list;
 }
 
+// class CommentList extends Component{
+//     constructor(props){
+//         super(props);
+//         // console.log(this.props);
+//         this.state = {
 
+//         }
+//     }
+
+//     render(){
+//         // console.log('User in comment list class:', this.props.user);
+//         var comment_list = this.props.comments.map(function (elem) {
+//             return <Comment comment={elem} key={uuid()} user={this.props.user}/>
+//         })
+
+//         return (
+//             <div>{comment_list}</div>
+//         )
+//         // return null;
+//     }
+// }
 
 class CommentsApp extends Component {
     constructor(props) {
@@ -36,8 +54,6 @@ class CommentsApp extends Component {
             comments: [],
             comment: '',
             user: null,
-
-            // commentPerPage: 7,
             currentPage: 1,
         }
 
@@ -48,11 +64,11 @@ class CommentsApp extends Component {
 
     componentWillMount() {
 
-        const url = window.location.href + 'True';
+        const thread_data_url = window.location.href + 'True';
 
         this.setState({ fetching: true });
 
-        fetch(url)
+        fetch(thread_data_url)
             .then(response => {
                 if (response.status !== 200) {
                     this.setState({ err: true })
@@ -65,7 +81,6 @@ class CommentsApp extends Component {
             .catch(err => {
                 console.warn(err);
             });
-
     }
 
     componentDidMount() {
@@ -80,7 +95,7 @@ class CommentsApp extends Component {
                 })
             });
 
-        console.log(this.state.user)
+        // console.log(this.state.user)
     }
 
     handlePagination(event){
@@ -139,9 +154,6 @@ class CommentsApp extends Component {
     }
 
 
-
-
-
     render() {
 
         // const { comments, currentPage, commentsPerPage } = this.state;
@@ -152,8 +164,11 @@ class CommentsApp extends Component {
         const indexOfFirst = indexOfLast - commentsPerPage;
         const currentComments = this.state.comments.slice(indexOfFirst, indexOfLast);
 
+        // console.log('render',this.state.user)
 
-        const renderComments =  <CommentList comments={currentComments} />
+        
+        const renderComments = CommentList(currentComments, this.state.user);
+        //  <CommentList comments={currentComments} user={this.state.user}/>
 
         const pageNumbers = [];
         for (let i = 1; i <= Math.ceil(this.state.comments.length / commentsPerPage); i++) {
@@ -163,11 +178,7 @@ class CommentsApp extends Component {
 
         const renderPageNumbers = pageNumbers.map(number => {
             return (
-              <li
-                key={number}
-                id={number}
-                onClick={this.handlePagination}
-              >
+              <li key={number} id={number} onClick={this.handlePagination}>
                 {number}
               </li>
             );
@@ -177,7 +188,7 @@ class CommentsApp extends Component {
 
             this.state.fetching ? <a className="button is-loading">Loading</a> : (
                 <div className="component_wrapper">
-                    <ThreadStart data={this.state.data} />
+                    <ThreadStart data={this.state.data} user={this.state.user}/>
 
                     {/* <CommentList comments={renderComments} /> */}
 

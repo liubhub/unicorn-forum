@@ -4,7 +4,7 @@ import { dateDifference, noneAvatarUrl } from '../../Thread';
 import LikeButton from '../../LikeButton';
 
 
-const ThreadStart = ({ data }) => (
+const ThreadStart = ({ data, user }) => (
     <article className="media thread-comments" >
         <figure className="media-left">
             <p className={"image is-128x128"}>
@@ -27,7 +27,7 @@ const ThreadStart = ({ data }) => (
             </div>
         </div>
 
-        <LikeButton theme/>
+        <LikeButton theme user={user}/>
     </article>
 );
 

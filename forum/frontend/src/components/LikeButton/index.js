@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import './like.css'
+
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
 class LikeButton extends Component{
     constructor(props){
         super(props)
 
         this.state = {
-            // если лайкнуто пусть она будет больше
-            isLiked: false,
+            isClickedLike:false,
+            isLikedByUser: false,
         }
     }
+
+    
 
     render(){
         return (
