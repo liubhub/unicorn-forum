@@ -2028,7 +2028,7 @@ eval("exports = module.exports = __webpack_require__(/*! ../../../../../node_mod
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \".media.thread-comments {\\n  border: 1px solid lightgrey;\\n  padding: 1em; }\\n\\n.media.thread-comments .media-content .subject.details strong {\\n  font-size: 2em; }\\n\\n.media.thread-comments .media-content .subject.details p.details {\\n  font-size: 1.1em; }\\n\\n.author-username {\\n  padding-top: 3em; }\\n\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./forum/frontend/src/components/ThreadComments/comments.css?./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js");
+eval("exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \".media-content {\\n  display: block;\\n  /* overflow: visible; */\\n  /* word-wrap: break-word; */ }\\n\\n.media.thread-comments {\\n  border: 1px solid lightgrey;\\n  padding: 1em; }\\n\\n.media.thread-comments .media-content .subject.details strong {\\n  font-size: 2em; }\\n\\n.media.thread-comments .media-content .subject.details p.details {\\n  font-size: 1.1em; }\\n\\n.author-username {\\n  padding-top: 3em; }\\n\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./forum/frontend/src/components/ThreadComments/comments.css?./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js");
 
 /***/ }),
 

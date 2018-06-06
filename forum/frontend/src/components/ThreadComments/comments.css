@@ -1,3 +1,9 @@
+.media-content{
+    display: block;
+    /* overflow: visible; */
+    /* word-wrap: break-word; */
+}
+
 .media.thread-comments{
     border: 1px solid lightgrey;
     padding: 1em;
