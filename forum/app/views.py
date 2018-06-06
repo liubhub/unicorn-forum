@@ -11,7 +11,7 @@ from . import models
 from users.views import TokenAuthentication
 from api import serializers
 
-class Thread(views.APIView):
+class ThreadAPI(views.APIView):
     @csrf_exempt
     def post(self, request):
         Auth = TokenAuthentication()
@@ -48,10 +48,9 @@ class Thread(views.APIView):
 
         return HttpResponse(status=400)
 
-class UserProfile(views.APIView):
-    # TODO: Нужно как-то ограничить эти действия... А ВСЁ БЛЯ И ТАК ОГРАНИЧЕНО ХАХА ТОКЕН 
+class UserAPI(views.APIView):
     def get(self, request):
-
+        # TODO: тут нужна обработка ошибок если токена нет...
         Auth = TokenAuthentication()
         res = Auth.authenticate(request)
         if res:
@@ -66,14 +65,21 @@ class UserProfile(views.APIView):
 
     def post(self, request):
         pass
-    
+
+class LikeAPI(views.APIView):
+    def post(self, request):
+        # request - user & entity id
+        pass
+
+    def get(self, request):
+        pass   
 
 
 @csrf_exempt
 def comment_thread(request):
     if request.method == "POST":
         print(request.POST)
-
+        # TODO: Maybe Optimize
         # оптимальность зашкаливает
         # проверить авторизацию
         # создать ентити
