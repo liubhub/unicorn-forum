@@ -3,4 +3,4 @@ import {render} from 'react-dom'
 
 import Comments from "./components/ThreadComments";
 
-render(<Comments/>, document.querySelector('#comments .container'));
+render(<CommentsApp/>, document.querySelector('#comments .container'));

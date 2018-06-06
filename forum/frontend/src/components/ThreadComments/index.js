@@ -25,14 +25,14 @@ function CommentList(comments) {
 
 
 
-class Comments extends Component {
+class CommentsApp extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             data: null,
             fetching: false,
-            err: false,
+            err: false, // TODO: this error
             comments: [],
             comment: '',
             user: null
@@ -81,7 +81,6 @@ class Comments extends Component {
 
 
     handleInputChange(event) {
-        // console.log('Input...')
         var value = event.target.value;
         var name = event.target.name;
         this.setState({
@@ -155,4 +154,4 @@ class Comments extends Component {
     }
 }
 
-export default Comments;
+export default CommentsApp;
