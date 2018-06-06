@@ -1,127 +1,30 @@
-html, body { height:100%; }
-
 article.thread-comments{
   position: relative;
-}  
-
-.flexbox {
-	display: flex;
-	height: 100%;
-	justify-content: center;
-	align-items: center;
 }
-
-.fav-btn {
-	display:flex;
-	height: 100%;
-	justify-content: center;
-	align-items: center;
-}
-
-
-@keyframes favme-anime {
-  0%   { 
-		opacity: 1;
-		font-size: ms(0);
-		-webkit-text-stroke-color: transparent;
-	}
-	25%	 { 
-		opacity:.6;
-		color: #FFF;
-		font-size: ms(-2);
-		-webkit-text-stroke-width: 1px;
-   	-webkit-text-stroke-color: #DC3232;
-	}
-	75%	 { 
-		opacity:.6;
-		color: #FFF;
-		font-size: ms(3);
-		-webkit-text-stroke-width: 1px;
-   	-webkit-text-stroke-color: #DC3232;
-	}
-  100% { 
-		opacity: 1;
-		font-size: ms(2);
-		-webkit-text-stroke-color: transparent;
-	}
-}
-
-@keyframes favme-hover {
-	from {
-		font-size: ms(3);
-	}
-	80% {
-		font-size: ms(2);
-	}
-}
-
-.favme {
-	display:block;
-	font-size: ms(2);
-	width: auto;
-	height: auto;
-	cursor: pointer;
-	box-shadow: none;
-	transition: all .2s ease;
-	color: #CBCDCE;
-	margin: 0;
-}
-	.favme.active {
-		color: #DC3232;
-	}
-	.favme:hover {
-		animation: favme-hover .3s infinite alternate;
-	}
-	.fevme.is_animating {
-		animation: favme-anime .3s;
-	}
-
-
-
-
-
-/* .heart {
-    display: block;
-    background-color: red;
-    height: 30px;
-    transform: rotate(-45deg);
-    width: 30px;
-  }
-
-.heart::before,
-.heart::after {
-  content: "";
-  background-color: red;
-  border-radius: 50%;
-  height: 30px;
-  position: absolute; 
-  width: 30px;
-} 
-
-article.thread-comments{
-  position: relative;
-}  */
-/* .heart {
-  width: 100px;
-  height: 100px;
+div.like-wrapper{
   position: absolute;
-  right: 0;
-  bottom:0;
-  transform: translate(-50%, -50%);
-  background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
-  background-position: 0 0;
+  right: 10px;
+  bottom: 10px;
+}
+.num-of-likes{
+  display: inline-block;
+  padding-right: 10px;
+}
+.heart {
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/heart.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  height: 20px;
+  width: 20px;
+  top: 5px;
   cursor: pointer;
-  animation: fave-heart 1s steps(28);
 }
-.heart.onclick {
-  background-position: -2800px 0;
-  transition: background 1s steps(28);
+.heart.isLiked{
+  height: 25px;
+  widows: 25px;
 }
-@keyframes fave-heart {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: -2800px 0;
-  }
-}  */
+.heart:hover{
+  transform:scale(1.2);
+}

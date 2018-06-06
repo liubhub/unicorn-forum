@@ -5,79 +5,13 @@ import axios from 'axios';
 import DataProvider from '../Thread/DataProvider';
 import '../thread.css';
 import './comments.css';
-import '../like.css'
-import { dateDifference, noneAvatarUrl } from '../Thread';
-
+import { noneAvatarUrl } from '../Thread';
+import Comment from './Comment';
+import ThreadStart from './ThreadStart';
 
 const uuid = shortid.generate;
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
-const ThreadStart = ({ data }) => (
-    <article className="media thread-comments" >
-        <figure className="media-left">
-            <p className={"image is-128x128"}>
-                <img src={data.user.avatar || noneAvatarUrl} />
-            </p>
-            <div className="author-username">
-                <small>{'@' + data.user.username.toString() + ' '}</small>
-            </div>
-        </figure>
-        <div className="media-content">
-            <div className="content">
-                <div className="subject details">
-                    <strong>{data.subject}</strong>
-                    <div className="is-pulled-right">
-                        <small>{dateDifference(data.created_at) == 'day' ? 'today' : dateDifference(data.created_at)}</small>
-                    </div>
-                    <p className="details">{data.content}</p>
-                    <small className="category">{data.category.category_name}</small>
-                </div>
-            </div>
-        </div>
-    </article>
-);
-
-function LikeButton(props) {
-    return (
-        <div className="flexbox">
-            <div className="fav-btn">
-                <span href="" className="favme dashicons dashicons-heart">х</span>
-            </div>
-        </div>
-    )
-}
-
-const Comment = ({ comment }) => (
-    <article className="media thread-comments" >
-        <figure className="media-left">
-            <p className="image is-96x96">
-                <img src={comment.creator.avatar || noneAvatarUrl} />
-            </p>
-            <div className="author-username">
-                <small>{'@' + comment.creator.username.toString() + ' '}</small>
-            </div>
-        </figure>
-        <div className="media-content">
-            <div className="content">
-                <div className="subject details">
-                    <strong>{comment.subject}</strong>
-                    <div className="is-pulled-right">
-                        <small>{dateDifference(comment.created_at) == 'day' ? 'today' : dateDifference(comment.created_at)}</small>
-                    </div>
-                    <p className="details">{comment.comment.content}</p>
-                </div>
-            </div>
-        </div>
-
-
-        <div className="flexbox">
-            <div className="fav-btn">
-                <span href="" className="favme dashicons dashicons-heart"></span>
-            </div>
-        </div>
-
-    </article>
-);
 
 
 function CommentList(comments) {
