@@ -52,16 +52,21 @@ class ThreadAPI(views.APIView):
 class UserAPI(views.APIView):
     def get(self, request):
         # TODO: тут нужна обработка ошибок если токена нет...
-        Auth = TokenAuthentication()
-        res = Auth.authenticate(request)
-        if res:
-            user, token = res
+        
+        if 'HTTP_AUTHORIZATION' in request.META:
+            Auth = TokenAuthentication()
+            res = Auth.authenticate(request)
+            if res:
+                user, token = res
             
-            serializer = serializers.UserSerializer(user)
+                serializer = serializers.UserSerializer(user)
 
-            return JsonResponse(serializer.data)
-        else:
-            return HttpResponse(status=400)
+                return JsonResponse(serializer.data)
+
+            else:
+                return HttpResponse(status=400)
+        
+        # if get args
 
 
     def post(self, request):
