@@ -50,7 +50,7 @@ class ThreadAPI(views.APIView):
         return HttpResponse(status=400)
 
 class UserAPI(views.APIView):
-    def get(self, request):
+    def get(self, request, username=None):
         # TODO: тут нужна обработка ошибок если токена нет...
         
         if 'HTTP_AUTHORIZATION' in request.META:
@@ -66,7 +66,21 @@ class UserAPI(views.APIView):
             else:
                 return HttpResponse(status=400)
         
-        # if get args
+        if username:
+            
+            user = models.User.objects.filter(username=username).first()
+            
+            if user:
+                
+                profile = models.Profile(user=user)
+                serializer = serializers.ProfileSerializer(profile)
+
+                return JsonResponse(serializer.data)
+
+            else:
+                return HttpResponse(status=400)
+
+            return JsonResponse({'ok':True})
 
 
     def post(self, request):

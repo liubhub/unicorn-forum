@@ -32,16 +32,34 @@ class CommentInfoSerializer(serializers.ModelSerializer):
         model = models.CommentMeta
         fields = '__all__'
 
+class LikesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.LikedEntity
+        fields = '__all__'
 
 class ProfileSerializer(serializers.ModelSerializer): 
-    user = UserSerializer()
+
     num_user_comments = serializers.SerializerMethodField()
     user_threads = serializers.SerializerMethodField()
+    user_data = serializers.SerializerMethodField()
+    user_likes = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Profile
         fields = '__all__'
     
+    def get_user_likes(self,obj):
+        likes = models.LikedEntity.objects.filter(user_id=obj.user_id).all()
+        likes_serializer = LikesSerializer(likes, many=True)
+        return likes_serializer.data
+
+
+    def get_user_data(self,obj):
+        user = models.User.objects.filter(id=obj.user_id).first()
+        user_serializer = UserSerializer(user)
+        return user_serializer.data
+
     def get_user_threads(self, obj):
         usr_threads = models.ThreadTheme.objects.filter(user_id=obj.user_id)
         usr_threads_serializer = ThreadSerializer(usr_threads, many=True)

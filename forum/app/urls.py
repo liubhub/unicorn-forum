@@ -9,9 +9,14 @@ urlpatterns = [
     url(r'^thread/(?P<thread_id>t[0-9]+)((?P<data>.*/$))', views.ThreadAPI.as_view()),
 
     path('user', views.UserAPI.as_view()),
-    path('users/', views.users_template),
+    url(r'^user/(?P<username>\w+)/$', views.UserAPI.as_view()),
+
+
     path('comment/', views.comment_thread),
-    path('like/', views.LikeAPI.as_view())
+    path('like/', views.LikeAPI.as_view()),
+
+    # TODO: 
+    path('users/', views.users_template),
 
     # path('api/users', views.users_info),
     # url(r'thread/(?P<thread_id>t[0-9]+)((?P<data>[True]+)/)?$', views.Thread.as_view()),
