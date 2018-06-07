@@ -19,6 +19,10 @@ class LikeButton extends Component{
 
     componentDidMount(){
 
+        if (!localStorage.getItem('token')) {
+            return;
+        }
+
         const config = {
             params: {
                 entity: this.props.entity,
@@ -41,6 +45,10 @@ class LikeButton extends Component{
 
 
     handleLikeClick(event){
+
+        if (!localStorage.getItem('token')) {
+            return;
+        }
 
         this.setState({
             isLikedByUser: !this.state.isLikedByUser,
