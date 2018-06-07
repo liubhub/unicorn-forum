@@ -62,6 +62,9 @@ class CommentsApp extends Component {
     }
 
     componentDidMount() {
+        if(!localStorage.getItem('token')){
+            return;
+        }
         const url = 'http://127.0.0.1:8000/' + 'user'
         const config = { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } };
         fetch(url, config)
