@@ -27,7 +27,7 @@ const ThreadStart = ({ data, user }) => (
             </div>
         </div>
 
-        <LikeButton theme user={user}/>
+        <LikeButton theme user={user} entity={data.entity}/>
     </article>
 );
 

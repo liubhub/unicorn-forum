@@ -25,7 +25,7 @@ const Comment = ({ comment, user }) => (
             </div>
         </div>
 
-    <LikeButton user={user}/>
+    <LikeButton user={user} entity={comment.id}/>
     </article>
 );
 

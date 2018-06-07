@@ -20,8 +20,8 @@ div.like-wrapper{
   width: 20px;
   top: 5px;
   cursor: pointer;
-  -webkit-filter: opacity(.6);
-  filter: opacity(.6);
+  -webkit-filter: opacity(.45);
+  filter: opacity(.45);
 }
 .heart.isLiked{
   -webkit-filter: opacity(1);

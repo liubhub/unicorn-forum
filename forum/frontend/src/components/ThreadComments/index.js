@@ -143,7 +143,6 @@ class CommentsApp extends Component {
         const currentComments = this.state.comments.slice(indexOfFirst, indexOfLast);
 
         // console.log('render',this.state.user)
-
         
         const renderComments = CommentList(currentComments, this.state.user);
         //  <CommentList comments={currentComments} user={this.state.user}/>

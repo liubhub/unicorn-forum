@@ -68,8 +68,13 @@ class UserAPI(views.APIView):
 
 class LikeAPI(views.APIView):
     def post(self, request):
-        # request - user & entity id
-        pass
+        print(request.is_ajax())
+        print(request.POST)
+
+        # print(dict(request.POST))
+        # import json
+        # print(json.loads(str(request.POST)))
+        return HttpResponse(status=200)
 
     def get(self, request):
         pass   
