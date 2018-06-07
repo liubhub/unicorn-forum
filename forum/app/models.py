@@ -62,7 +62,7 @@ class Entity(models.Model):
         db_table = "entity"
     
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 class Avatar(models.Model):
     entity = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
@@ -119,11 +119,16 @@ class CommentMeta(models.Model):
 
 class LikedEntity(models.Model):
     id = models.BigAutoField(primary_key=True)
-    entity = models.OneToOneField(Entity, on_delete=models.CASCADE)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    entity = models.ForeignKey(Entity, on_delete=models.CASCADE, unique=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,unique=False)
 
     class Meta():
         db_table = "liked_entity"
+        unique_together = ('entity', 'user',)
+    
+    def __str__(self):
+        # return str(self.entity) + ", " + str(self.subject)
+        return str(self.id)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

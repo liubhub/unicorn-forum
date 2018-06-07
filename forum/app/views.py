@@ -1,3 +1,4 @@
+import json
 from rest_framework import views
 
 from django.http import HttpResponse, JsonResponse
@@ -68,16 +69,44 @@ class UserAPI(views.APIView):
 
 class LikeAPI(views.APIView):
     def post(self, request):
-        print(request.is_ajax())
-        print(request.POST)
 
-        # print(dict(request.POST))
-        # import json
-        # print(json.loads(str(request.POST)))
+        body = json.loads(request.body.decode(encoding='UTF-8'))
+
+        entity = models.Entity.objects.filter(id=(body['entity'])).first()
+        user = models.User.objects.filter(id=int(body['user'])).first()
+
+        is_liked = models.LikedEntity.objects.filter(user=user,entity=entity).first()
+
+        if is_liked:
+            is_liked.delete()
+            return HttpResponse(status=200)
+
+        like = models.LikedEntity(user=user, entity=entity)
+        like.save()
+
         return HttpResponse(status=200)
 
     def get(self, request):
-        pass   
+        
+        print(request.GET)
+
+        entity_id = int(request.GET.get('entity'))
+        user_id = int(request.GET.get('user'))
+
+        entity = models.Entity.objects.filter(id=(entity_id)).first()
+        # user = models.User.objects.filter(id=user_id)
+
+        likes = models.LikedEntity.objects.filter(entity=entity).all()
+        is_liked_by_user = False
+        for like in likes:
+            if user_id == like.user_id:
+                is_liked_by_user=True
+                break
+        # is_liked_by_user = models.LikedEntity.objects.filter(entity=entity,user=user).first()
+        # has_liked = True if is_liked_by_user else False
+        
+
+        return JsonResponse(dict(num_of_likes=len(likes),is_liked_by_user=is_liked_by_user))
 
 
 @csrf_exempt
