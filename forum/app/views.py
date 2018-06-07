@@ -71,10 +71,8 @@ class UserAPI(views.APIView):
             user = models.User.objects.filter(username=username).first()
             
             if user:
-                
                 profile = models.Profile(user=user)
                 serializer = serializers.ProfileSerializer(profile)
-
                 return JsonResponse(serializer.data)
 
             else:
