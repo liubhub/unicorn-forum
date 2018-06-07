@@ -10,7 +10,7 @@ const Comment = ({ comment, user }) => (
                 <img src={comment.creator.avatar || noneAvatarUrl} />
             </p>
             <div className="author-username">
-                <small>{'@' + comment.creator.username.toString() + ' '}</small>
+                <small><a href={"/user/"+comment.creator.username.toString()}>{'@' + comment.creator.username.toString() + ' '}</a></small>
             </div>
         </figure>
         <div className="media-content">

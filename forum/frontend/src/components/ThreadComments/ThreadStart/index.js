@@ -11,7 +11,7 @@ const ThreadStart = ({ data, user }) => (
                 <img src={data.user.avatar || noneAvatarUrl} />
             </p>
             <div className="author-username">
-                <small>{'@' + data.user.username.toString() + ' '}</small>
+                <small><a href={"/user/"+data.user.username.toString()}>{'@' + data.user.username.toString() + ' '}</a></small>
             </div>
         </figure>
         <div className="media-content">
