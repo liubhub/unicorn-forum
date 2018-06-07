@@ -56,7 +56,7 @@ export class MediaElement extends Component {
         <div className="media-content">
           <div className="content">
             <div className="subject details">
-              <strong>{this.props.thread.subject}</strong> <small>{'@' + this.props.thread.user.username.toString() + ' '}</small>
+              <strong>{this.props.thread.subject}</strong> <small><a href={"/user/"+this.props.thread.user.username.toString()}>{'@' + this.props.thread.user.username.toString() + ' '}</a></small>
               <small>{dateDifference(this.props.thread.created_at) == 'day' ? 'today' : dateDifference(this.props.thread.created_at)}</small>
               <p className="details">{this.props.thread.content.length > max_thread_content ? this.props.thread.content.slice(0, max_thread_content) : this.props.thread.content}</p>
               <small className="category">{this.props.thread.category.category_name}</small>
@@ -74,7 +74,7 @@ export class MediaElement extends Component {
               </p>
             </figure>
             <div className="author-of-comment is-pulled-right">
-              <p><strong>{this.props.thread.last_meta_data.last_commented_username}</strong></p>
+              <p><strong><a href={"/user/"+this.props.thread.last_meta_data.last_commented_username}>{this.props.thread.last_meta_data.last_commented_username}</a></strong></p>
               <p><small>{dateDifference(this.props.thread.last_meta_data.last_commented_date)}</small></p>
             </div>
           </div>) : ''
