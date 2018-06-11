@@ -1,3 +1,6 @@
+forum/frontend/static/img/*
+forum/frontend/templates/frontend/users1.html
+ngrok
 pip-selfcheck.json
 share/*
 lib/*
