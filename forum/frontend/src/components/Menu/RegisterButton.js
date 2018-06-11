@@ -19,7 +19,7 @@ class RegisterButton extends Component {
     render() {
         return (
             <div className="button is-primary" id="register" onClick={this.handleClick}>
-                <div>{localStorage.getItem('token') ? "My profile": "Register"}</div>
+                <div>Register</div>
                 {
                     this.state.isClicked && (
                         // <RegisterPortalComponent onClose={() => this.setState({ isClicked: false })} />
