@@ -51,7 +51,7 @@ class ThreadAPI(views.APIView):
 
 class UserAPI(views.APIView):
     def get(self, request, username=None):
-        pass
+        return render(request, 'frontend/user.html')
         # if 'HTTP_AUTHORIZATION' in request.META:
         #     Auth = TokenAuthentication()
         #     res = Auth.authenticate(request)

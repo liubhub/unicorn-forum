@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^thread/(?P<thread_id>t[0-9]+)((?P<data>.*/$))', views.ThreadAPI.as_view()),
 
     # path('user', views.UserAPI.as_view()),
-    # url(r'^user/(?P<username>\w+)/$', views.UserAPI.as_view()),
+    url(r'^user/(?P<username>\w+)/$', views.UserAPI.as_view()),
 
 
     path('comment/', views.comment_thread),

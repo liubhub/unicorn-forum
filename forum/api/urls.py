@@ -13,5 +13,5 @@ urlpatterns = [
     # /api/user/username - без токена для вытаскивания инфы о пользователе для профиля
 
     path('api/user', views.UserAPIView.as_view()),
-    url(r'^user/(?P<username>\w+)/$', views.UserAPIView.as_view()),
+    url(r'^api/user/(?P<username>\w+)/$', views.UserAPIView.as_view()),
 ]
