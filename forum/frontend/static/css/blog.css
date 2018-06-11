@@ -1,0 +1,89 @@
+html, body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  background-color: #FA8BFF;
+  background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%); }
+
+.article {
+  margin-top: 12rem; }
+
+.user-profile-data > .user-image-container {
+  display: block;
+  margin-bottom: 1rem; }
+  .user-profile-data > .user-image-container > .user-image {
+    position: absolute;
+    top: calc(200px/(-2));
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 3px solid #ccc;
+    border-radius: 50%; }
+    @media only screen and (max-width: 768px) {
+      .user-profile-data > .user-image-container > .user-image {
+        top: calc(100px/(-2));
+        width: 100px;
+        height: 100px; } }
+.user-profile-data > .user-details {
+  margin-top: 6rem; }
+  @media only screen and (max-width: 768px) {
+    .user-profile-data > .user-details {
+      margin-top: 3rem; } }
+  .user-profile-data > .user-details > .user-name {
+    font-size: 2rem;
+    font-weight: lighter;
+    line-height: 2; }
+  .user-profile-data > .user-details > .location {
+    color: #909AA0;
+    margin-bottom: 3rem; }
+    .user-profile-data > .user-details > .location > figure.image {
+      display: inline-block; }
+
+.user-profile-details {
+  line-height: 1.4;
+  margin: 0 6rem; }
+  .user-profile-details .message-to-user {
+    margin: 0px 0 0px 30px;
+    cursor: pointer;
+    position: relative;
+    padding-top: 30px; }
+    .user-profile-details .message-to-user .chat-icon {
+      position: absolute;
+      bottom: 0;
+      margin: 0; }
+    .user-profile-details .message-to-user .send-message {
+      display: inline-block;
+      padding-left: 30px;
+      color: #909AA0; }
+    .user-profile-details .message-to-user figure {
+      display: inline-block; }
+  .user-profile-details .detail {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #909AA0; }
+    .user-profile-details .detail span {
+      display: inline-block;
+      padding-left: 30px;
+      margin: 20px 0 0px 0; }
+    .user-profile-details .detail.about {
+      margin: 30px; }
+      .user-profile-details .detail.about .about-text {
+        line-height: 2em;
+        font-size: 1.2em; }
+    .user-profile-details .detail.social-media > * {
+      display: inline-block; }
+    .user-profile-details .detail.social-media .icon {
+      cursor: pointer; }
+  .user-profile-details .user-history {
+    margin-right: 20px; }
+    .user-profile-details .user-history .history {
+      font-size: 1.3em;
+      font-family: 'Open Sans', sans-serif;
+      margin: 10px 50px 0 50px;
+      color: #909AA0;
+      cursor: pointer; }
+
+/*# sourceMappingURL=blog1.css.map */

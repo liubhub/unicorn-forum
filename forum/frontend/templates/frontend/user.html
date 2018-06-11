@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 
@@ -11,19 +12,63 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <!-- Bulma Version 0.7.1-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/blog1.css">
+    <link rel="stylesheet" type="text/css" href="{% static "css/blog.css" %}">
 </head>
 
 <body>
-
+    <nav class="navbar menu1">
+        <div class="navbar-brand">
+            <div class="navbar-burger burger" data-target="navMenubd-example">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    
+        <div id="navMenubd-example" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item is-hoverable" href="/">
+                   Unicorn
+                </a>
+                <a class="navbar-item  is-hoverable" href="/">
+                    Threads
+                </a>
+                <a class="navbar-item is-hoverable" href="/api/category">
+                    Categories
+                </a>
+                <a class="navbar-item is-hoverable" href="/users">
+                    <span class="bd-emoji">❤️</span> &nbsp;Users
+                </a>
+                <a class="navbar-item is-hoverable" title="Join my project on GitLab!" href="https://gitlab.com/chamberijorik/unicorn_forum">
+                    <span class="bd-emoji">🎨</span> &nbsp;Build Process&nbsp;
+                    <span class="bd-emoji">🎨</span>
+                </a>
+            </div>
+    
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="field is-grouped">
+                        <div class="control" id="loginButton">
+                          
+    
+                        </div>
+                        <div class="control" id="registerButton">
+    
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
     <!-- START ARTICLE -->
     <div class="card article">
-        <div class="card-content">
+        <div class="card-content" id="profile-container">
 
 
             <div class="media user-profile-data">
                 <div class="media-center user-image-container">
-                    <img src="img/girl.jpeg" class="user-image" alt="Placeholder image">
+                    <img src="{% static "img/girl.jpeg" %}" class="user-image" alt="Placeholder image">
                 </div>
 
                 <div class="media-content has-text-centered user-details">
@@ -31,7 +76,7 @@
                     <div class="subtitle is-6 article-subtitle location">
 
                             <figure class="image is-16x16">
-                                <img src="img/location_on_grey_18x18.png">
+                                <img src="{% static "img/location_on_grey_18x18.png" %}">
                             </figure>
                             <span>Kharkiv, Ukraine</span>
 
@@ -49,8 +94,8 @@
                 <div class="columns">
                     <div class="column">
                         <div class="message-to-user">
-                            <figure class="chat-icon image is-24x24">
-                                <img src="img/emoticon-chat.png">
+                            <figure class="chat-icon image is-32x32">
+                                <img src="{% static "img/emoticon-chat.png" %}">
                             </figure>
                             <p class="send-message is-size-6">Send Message</p>
                         </div>
@@ -74,16 +119,16 @@
                         </div>
                         <div class="social-media detail">
                             <div class="icon is-medium">
-                                <img src="img/social/021-facebook.png" alt="Facebook">
+                                <img src="{% static "img/social/021-facebook.png" %}" alt="Facebook">
                             </div>
                             <div class="icon is-medium">
-                                <img src="img/social/021-instagram.png" alt="Instagram">
+                                <img src="{% static "img/social/021-instagram.png" %}" alt="Instagram">
                             </div>
                             <div class="icon is-medium">
-                                <img src="img/social/021-twitter.png" alt="Twitter">
+                                <img src="{% static "img/social/021-twitter.png" %}" alt="Twitter">
                             </div>
                             <div class="icon is-medium">
-                                <img src="img/social/021-youtube.png" alt="Youtube">
+                                <img src="{% static "img/social/021-youtube.png" %}" alt="Youtube">
                             </div>
                         </div>
 
@@ -114,20 +159,11 @@
         </div>
     </div>
 
-    <footer class="footer">
-            <div class="container">
-                <div class="content ">
-                    <p>
-                        <strong>Unicorn-forum</strong> by
-                        <a href="https://github.com/LouisCauchy">Louis Cauchy</a>. The source code is licensed
-                        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content is licensed
-                        <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-                    </p>
-                </div>
-            </div>
-        </footer>
 
 
+    {% block 'footer' %} {% include 'frontend/footer.html' %} {% endblock %}
 </body>
+{% load static %}
+<script src="{% static "frontend/profile.js" %}"></script>
 
 </html>
