@@ -51,34 +51,27 @@ class ThreadAPI(views.APIView):
 
 class UserAPI(views.APIView):
     def get(self, request, username=None):
-        # TODO: тут нужна обработка ошибок если токена нет...
+        pass
+        # if 'HTTP_AUTHORIZATION' in request.META:
+        #     Auth = TokenAuthentication()
+        #     res = Auth.authenticate(request)
+        #     if res:
+        #         user, token = res
+        #         serializer = serializers.UserSerializer(user)
+        #         return JsonResponse(serializer.data)
+        #     else:
+        #         return HttpResponse(status=400)
         
-        if 'HTTP_AUTHORIZATION' in request.META:
-            Auth = TokenAuthentication()
-            res = Auth.authenticate(request)
-            if res:
-                user, token = res
-            
-                serializer = serializers.UserSerializer(user)
+        # if username:
+        #     user = models.User.objects.filter(username=username).first()
+        #     if user:
+        #         profile = models.Profile(user=user)
+        #         serializer = serializers.ProfileSerializer(profile)
+        #         return JsonResponse(serializer.data)
+        #     else:
+        #         return HttpResponse(status=400)
 
-                return JsonResponse(serializer.data)
-
-            else:
-                return HttpResponse(status=400)
-        
-        if username:
-            
-            user = models.User.objects.filter(username=username).first()
-            
-            if user:
-                profile = models.Profile(user=user)
-                serializer = serializers.ProfileSerializer(profile)
-                return JsonResponse(serializer.data)
-
-            else:
-                return HttpResponse(status=400)
-
-            return JsonResponse({'ok':True})
+        #     return JsonResponse({'ok':True})
 
 
     def post(self, request):

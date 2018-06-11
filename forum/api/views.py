@@ -1,9 +1,13 @@
+import pprint
+
 from django.shortcuts import render
 from rest_framework.response import Response
+from django.http import HttpResponse, JsonResponse
 
 
 from rest_framework.views import APIView
 from .serializers import *
+from users.views import TokenAuthentication
 from app import models
 
 
@@ -21,7 +25,30 @@ class CategoryAPIView(APIView):
         return Response(serializer.data)
 
 class UserAPIView(APIView):
-    def get(self, request):
-        profiles = models.Profile.objects.all()
-        serializer = ProfileSerializer(profiles, many=True)
-        return Response(serializer.data)
+    def get(self, request, username=None):
+
+        if request.META['PATH_INFO'] == '/api/users/': # хз это хорошо или плохо
+            profiles = models.Profile.objects.all()
+            serializer = ProfileSerializer(profiles, many=True)
+            return Response(serializer.data)
+
+        if 'HTTP_AUTHORIZATION' in request.META:
+            Auth = TokenAuthentication()
+            res = Auth.authenticate(request)
+            if res:
+                user, token = res
+                serializer = UserSerializer(user)
+                return JsonResponse(serializer.data)
+            else:
+                return HttpResponse(status=400)
+
+        if username:
+            user = models.User.objects.filter(username=username).first()
+            if user:
+                profile = models.Profile(user=user)
+                serializer = ProfileSerializer(profile)
+                return JsonResponse(serializer.data)
+            else:
+                return HttpResponse(status=400)
+
+            return JsonResponse({'ok':True})
