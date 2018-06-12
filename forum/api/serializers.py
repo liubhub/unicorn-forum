@@ -17,7 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.User
-        fields = ['id','first_name','last_name','username','avatar']
+        fields = ['id','first_name','last_name','username','avatar', 'date_joined']
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:

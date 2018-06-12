@@ -12,13 +12,14 @@ class Profile(models.Model):
     country = models.CharField(max_length=25, null=True, blank=False)
     avatar = models.FileField(upload_to="avatars/", null=True, blank=True)  # MEDIA_ROOT/avatars
     updated_at = models.DateTimeField(auto_now=True)  # last modified his profile
-    confirmed = models.BooleanField(null=False, blank=False, default=0)
+    # confirmed = models.BooleanField(null=False, blank=False, default=0)
+    gender = models.BooleanField(null=False, default=0,blank=True);
 
     class Meta():
         db_table = 'user_profile'
 
-    def is_user_confirmed(self):
-        return self.confirmed
+    # def is_user_confirmed(self):
+    #     return self.confirmed
 
 class Category(models.Model):
     id = models.BigAutoField(primary_key=True)
