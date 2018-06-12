@@ -1,0 +1,77 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog - Free Bulma template</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!-- Bulma Version 0.7.1-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/blog.css" %}">
+</head>
+
+<body>
+    <nav class="navbar menu1">
+        <div class="navbar-brand">
+            <div class="navbar-burger burger" data-target="navMenubd-example">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    
+        <div id="navMenubd-example" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item is-hoverable" href="/">
+                   Unicorn
+                </a>
+                <a class="navbar-item  is-hoverable" href="/">
+                    Threads
+                </a>
+                <a class="navbar-item is-hoverable" href="/api/category">
+                    Categories
+                </a>
+                <a class="navbar-item is-hoverable" href="/users">
+                    <span class="bd-emoji">❤️</span> &nbsp;Users
+                </a>
+                <a class="navbar-item is-hoverable" title="Join my project on GitLab!" href="https://gitlab.com/chamberijorik/unicorn_forum">
+                    <span class="bd-emoji">🎨</span> &nbsp;Build Process&nbsp;
+                    <span class="bd-emoji">🎨</span>
+                </a>
+            </div>
+    
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="field is-grouped">
+                        <div class="control" id="loginButton">
+                          
+    
+                        </div>
+                        <div class="control" id="myProfileButton">
+    
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+        <div id="edit_profile">
+
+        </div>
+
+
+    {% block 'footer' %} {% include 'frontend/footer.html' %} {% endblock %}
+</body>
+{% load static %}
+<script src="{% static "frontend/edit_profile.js" %}"></script>
+
+</html>

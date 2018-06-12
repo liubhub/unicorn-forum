@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 import './profile.css';
 
 const noneAvatarUrl = '/static/avatar/avatar.png';
