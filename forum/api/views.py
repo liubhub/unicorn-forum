@@ -27,12 +27,14 @@ class CategoryAPIView(APIView):
 class UserAPIView(APIView):
     def get(self, request, username=None):
 
+
         if request.META['PATH_INFO'] == '/api/users/': # хз это хорошо или плохо
             profiles = models.Profile.objects.all()
             serializer = ProfileSerializer(profiles, many=True)
             return Response(serializer.data)
 
-        if 'HTTP_AUTHORIZATION' in request.META:
+
+        if 'HTTP_AUTHORIZATION' in request.META:# and request.META['HTTP_AUTHORIZATION'].split('Bearer')[1] != 'null':
             Auth = TokenAuthentication()
             res = Auth.authenticate(request)
             if res:
@@ -44,9 +46,12 @@ class UserAPIView(APIView):
 
         if username:
             user = models.User.objects.filter(username=username).first()
+            print(user.id)
             if user:
                 profile = models.Profile(user=user)
+                print(profile.bio)
                 serializer = ProfileSerializer(profile)
+                pprint.pprint(serializer.data)
                 return JsonResponse(serializer.data)
             else:
                 return HttpResponse(status=400)
