@@ -49,33 +49,23 @@ class ThreadAPI(views.APIView):
 
         return HttpResponse(status=400)
 
+# TODO: Это должно быть не здесь
+
 class UserAPI(views.APIView):
     def get(self, request, username=None):
-        return render(request, 'frontend/user.html')
-        # if 'HTTP_AUTHORIZATION' in request.META:
-        #     Auth = TokenAuthentication()
-        #     res = Auth.authenticate(request)
-        #     if res:
-        #         user, token = res
-        #         serializer = serializers.UserSerializer(user)
-        #         return JsonResponse(serializer.data)
-        #     else:
-        #         return HttpResponse(status=400)
         
-        # if username:
-        #     user = models.User.objects.filter(username=username).first()
-        #     if user:
-        #         profile = models.Profile(user=user)
-        #         serializer = serializers.ProfileSerializer(profile)
-        #         return JsonResponse(serializer.data)
-        #     else:
-        #         return HttpResponse(status=400)
+        if True:
 
-        #     return JsonResponse({'ok':True})
-
+            return render(request, 'frontend/user.html')
+        # if :
+        #     pass
+        
 
     def post(self, request):
         pass
+
+def edit_profile(request,username):
+    return render(request, 'frontend/edit_profile.html')
 
 class LikeAPI(views.APIView):
     def post(self, request):
