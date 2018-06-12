@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-// import RegisterForm from '../Forms/Register/RegisterForm'; 
 
 class EditProfileButton extends Component {
 

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import './profile.css';
-// axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
 const noneAvatarUrl = '/static/avatar/avatar.png';
 
