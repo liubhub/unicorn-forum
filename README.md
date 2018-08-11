@@ -75,7 +75,8 @@ React in its own “frontend” Django app: load a single HTML template and let 
 
 Here are instructions how to configure frontend environment.
 
-In your main folder, where all virtualenv files (it isunicorn_forum if you followed instructions):
+In your main folder where all virtualenv files are saved 
+(it is unicorn_forum if you followed instructions):
 initialize the environment
 ```sh
 npm init -y
