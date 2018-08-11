@@ -112,7 +112,7 @@ Configure Babel by creating a new file named .babelrcinside the project folder:
     ]
 }
 ```
-And finally create a new file named webpack.config.jsfor configuring babel-loader:
+And finally create a new file named webpack.config.js for configuring babel-loader:
 ```sh
 module.exports = {
   module: {

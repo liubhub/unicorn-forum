@@ -22,3 +22,6 @@ forum/*.ipynb
 forum/frontend/templates/registration/*
 db_data.json
 package-lock.json
+package.json
+webpack.config.js
+.babelrc
