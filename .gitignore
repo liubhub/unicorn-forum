@@ -20,3 +20,4 @@ public/*
 forum/.ipynb_checkpoints/*
 forum/*.ipynb
 forum/frontend/templates/registration/*
+db_data.json
