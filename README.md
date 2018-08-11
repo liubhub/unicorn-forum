@@ -88,8 +88,8 @@ npm i webpack webpack-cli --save-dev
 Now open up package.json and configure the scripts:
 ```sh
 "scripts": {
-  "dev": "webpack --mode development ./forum/frontend/src/index.js --output ./project/frontend/static/frontend/main.js",
-  "build": "webpack --mode production ./forum/frontend/src/index.js --output ./project/frontend/static/frontend/main.js"
+  "dev": "webpack --mode development ./forum/frontend/src/index.js --output ./forum/frontend/static/frontend/main.js",
+  "build": "webpack --mode production ./forum/frontend/src/index.js --output ./forum/frontend/static/frontend/main.js"
 }
 ```
 Close the file and save it.
