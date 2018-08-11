@@ -44,7 +44,6 @@ Return to your console, activate the virtual environment and create variables wi
 password to mysql and your database name:
 ```sh
 \q
-source bin/activate
 export DATABASE_NAME='unicorn_forum'
 export DATABASE_USER='your_username'
 export DATABASE_PASSWORD='your_password'
