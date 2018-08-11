@@ -50,7 +50,7 @@ def register(request):
         
         else:
             resp = 'Something went wrong'
-            return JsonResponse(resp, safe=False, stutus=400)
+            return JsonResponse(resp, safe=False, status=400)
     else:
         # TODO: render same form
         resp = 'Method Not Allowed'
