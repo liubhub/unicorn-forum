@@ -1,4 +1,3 @@
-# TODO: if username or email exists
 # TODO: ajax request if username already exists
 # TODO: if submit incorrect return same data in form
 # TODO: after first login show template with notification in profile to add data about user
@@ -22,8 +21,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth import login, authenticate
 from django.core.mail import EmailMessage
 from django.contrib.auth.models import User
-# ?
-from django.shortcuts import redirect
+
 
 from .tokens import account_activation_token
 
@@ -40,27 +38,24 @@ def register(request):
             message = render_to_string('email_confirm_template.html', {
                 'user': user,
                 'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(), #urlsafe_base64_encode(force_bytes(user.pk)),
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(), 
                 'token':account_activation_token.make_token(user),
             })
             to_email = form.cleaned_data.get('email')
             email = EmailMessage(
-                        mail_subject, message, to=[to_email] #fail_silently=False
+                        mail_subject, message, to=[to_email] 
             )
             email.send()
             return JsonResponse({'url': '/verify'})
-            # return HttpResponseRedirect('/thanks/')
-
-            # return HttpResponse('Please confirm your email address to complete the registration')
+        
         else:
             resp = 'Something went wrong'
             return JsonResponse(resp, safe=False, stutus=400)
     else:
         # TODO: render same form
-        # form = SignupForm()
         resp = 'Method Not Allowed'
         return JsonResponse(resp, status=405, safe=False)
-    return JsonResponse({'you':'registered'}) # render(request, 'signup.html', {'form': form})
+    return JsonResponse({'you':'registered'}) 
 
 def verify(request):
     # TODO: render only once
@@ -75,8 +70,6 @@ def activate(request, uidb64, token):
     if user and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        # login(request, user)
-        # return redirect('home')
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
