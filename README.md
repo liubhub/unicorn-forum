@@ -71,7 +71,66 @@ As a django project, unicorn_forum consists of different apps.
 - chat - future app for chat in the forum (currently it is a #TODO). 
 
 #### Frontend app
-React in its own “frontend” Django app: load a single HTML template and let React manage the frontend (difficulty: medium). All templates are saved in this app. 
+React in its own “frontend” Django app: load a single HTML template and let React manage the frontend. All templates are saved in this app. 
+
+Here are instructions how to configure frontend environment.
+
+In your main folder, where all virtualenv files (it isunicorn_forum if you followed instructions):
+initialize the environment
+```sh
+npm init -y
+```
+next up install webpack and webpack cli with
+```sh
+npm i webpack webpack-cli --save-dev
+```
+Now open up package.json and configure the scripts:
+```sh
+"scripts": {
+  "dev": "webpack --mode development ./forum/frontend/src/index.js --output ./project/frontend/static/frontend/main.js",
+  "build": "webpack --mode production ./forum/frontend/src/index.js --output ./project/frontend/static/frontend/main.js"
+}
+```
+Close the file and save it.
+Now let’s install babel for transpiling our code:
+```sh
+npm i babel-core babel-loader babel-preset-env babel-preset-react babel-plugin-transform-class-properties --save-dev
+```
+Pull in React and prop-types:
+```sh
+npm i react react-dom prop-types --save-dev
+```
+Configure Babel by creating a new file named .babelrcinside the project folder:
+```sh
+{
+    "presets": [
+        "env", "react"
+    ],
+    "plugins": [
+        "transform-class-properties"
+    ]
+}
+```
+And finally create a new file named webpack.config.jsfor configuring babel-loader:
+```sh
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      }
+    ]
+  }
+};
+```
+Now, to make webpack watch files for changes, you can run:
+```sh
+npm run dev
+```
 
 #### Email verification
 To enable email verification after registration on forum, set EMAIL_HOST_USER and EMAIL_HOST_PASSWORD
