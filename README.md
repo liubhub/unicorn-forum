@@ -101,7 +101,7 @@ Pull in React and prop-types:
 ```sh
 npm i react react-dom prop-types --save-dev
 ```
-Configure Babel by creating a new file named .babelrcinside the project folder:
+Configure Babel by creating a new file named .babelrc inside the project folder:
 ```sh
 {
     "presets": [
