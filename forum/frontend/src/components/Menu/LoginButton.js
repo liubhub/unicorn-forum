@@ -21,9 +21,8 @@ class LoginButton extends Component {
 
                 {
                     this.state.isClicked && (
-                        // <RegisterPortalComponent onClose={() => this.setState({ isClicked: false })} />
+                       
                         <LoginForm  
-                            // onClose={() => this.setState({ isClicked: false })} 
                             action="/login/"
                             title="Login"
                             actionButtonText="Login"

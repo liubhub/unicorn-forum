@@ -26,7 +26,6 @@ class LoginForm extends Component {
     handleSubmit(event) {
         event.preventDefault();
         event.stopPropagation();
-        console.log('click');
         var userFormData = new FormData();
 
         userFormData.set('username', this.state.username);
@@ -37,17 +36,12 @@ class LoginForm extends Component {
                 'Content-Type': 'multipart/form-data'
             },
         };
-
-        // console.log(userFormData);
-        console.log('Sending request...')
         axios({
             method: 'post',
             url: '/login/',
             data: userFormData,
             config: config
         }).then(function (response) {
-            // console.log(response);
-            // console.log(response.data);
             const token = response.data.token;
             if(token){
                 localStorage.setItem('token', token);
@@ -57,7 +51,6 @@ class LoginForm extends Component {
         .catch(function (response) {
             console.log(response);
         });
-        console.log('Всё');
     }
 
     render() {
@@ -71,16 +64,16 @@ class LoginForm extends Component {
 
                     <section className="modal-card-body">
                         <InputWrapper name="username" type="text" placeholder="Username" onChange={this.handleInputChange} />
-                        {/* <InputWrapper name="email" type="text" placeholder="E-mail" onChange={this.handleInputChange} /> */}
+                       
                         <InputWrapper name="pass" type="password" placeholder="Password" onChange={this.handleInputChange} />
-                        {/* <InputWrapper name="pass2" type="password" placeholder="Confirm password" onChange={this.handleInputChange} /> */}
+                       
 
                     </section>
 
                     <footer className="modal-card-foot">
                         <button className="button is-success" onClick={this.handleSubmit} type="submit">{this.props.actionButtonText}</button>
                         <button className="button is-text" type="button">{this.props.cancelButtonText}</button>
-                        {/* <button className="button is-text" type="button">Forgot Password?</button> */}
+                      
                     </footer>
                 </form>
             </FormWrapper>

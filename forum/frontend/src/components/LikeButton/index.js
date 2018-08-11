@@ -8,7 +8,6 @@ axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getIte
 class LikeButton extends Component{
     constructor(props){
         super(props)
-        console.log(this.props);
         this.state = {
             isLikedByUser: false,
             num_of_likes: 0,
@@ -32,7 +31,6 @@ class LikeButton extends Component{
 
         axios.get("/like", config)
         .then((response) => {
-            console.log(response.data);
             return response.data;
         }).then((data)=>{
            this.setState({
@@ -53,8 +51,6 @@ class LikeButton extends Component{
         this.setState({
             isLikedByUser: !this.state.isLikedByUser,
         },function(){
-            console.log(this.state);
-            
             this.setState({
                 num_of_likes : this.state.isLikedByUser ? this.state.num_of_likes+1 : this.state.num_of_likes-1
             })

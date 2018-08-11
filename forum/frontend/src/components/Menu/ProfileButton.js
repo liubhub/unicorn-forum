@@ -30,8 +30,7 @@ class ProfileButton extends Component{
     }
 
     handleClick(){
-        // получить имя пользователя который залогинен
-        
+
         const user = this.state.user.username;
 
         console.log(window.location.origin + "/user/" + user.toString());
