@@ -15,7 +15,7 @@ class ProfileButton extends Component{
     }
 
     componentWillMount(){
-        const url = 'http://127.0.0.1:8000/' + 'api/user'
+        const url = window.location.origin + 'api/user'
         const config = { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } };
         fetch(url, config)
             .then(response => {
