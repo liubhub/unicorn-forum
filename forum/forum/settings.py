@@ -14,20 +14,15 @@ import os
 import socket
 from .base import get_env_variable
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-ngf^-r9^9!k#xezsm*$v8*qgx69vrhfy4^0xkg+j%*(-&p9!8'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'f9469bff.ngrok.io']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -78,33 +73,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'forum.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'OPTIONS': {
-#             'read_default_file': '/etc/mysql/my.cnf',
-#         },
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': get_env_variable('DATABASE_NAME'),
         'USER': get_env_variable('DATABASE_USER'),
         'PASSWORD': get_env_variable('DATABASE_PASSWORD'),
-        # 'HOST': '',
-        # 'PORT': '',
     }
 }
 
@@ -141,36 +115,19 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATIC_ROOT = '/home/lovely/Documents/projects/unicorn_forum/forum/frontend/static'
-# STATIC_ROOT = '/home/django/innovindex/pubmed/static/'
 
 
 # this one is for uploads (avatar etc.)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 ACCOUNT_ACTIVATION_DAYS = 5
-
 LOGIN_REDIRECT_URL = '/'
 
-# APPEND_SLASH=False
-
-# CSRF_COOKIE_NAME = 'X-CSRFToken'#'X-CSRFToken' # "XCSRF-TOKEN"
 
 # EMAIL_USE_TLS = True
-# # EMAIL_HOST = 'smtp.yahoo.com'
-# EMAIL_HOST_USER = 'lihub.dev@gmail.com'#'konstantin_geev@yahoo.com'
-# EMAIL_HOST_PASSWORD = 'edinorozhek1996pony'
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
 # EMAIL_PORT = 587
 # EMAIL_HOST = socket.gethostbyname('smtp.gmail.com')
-
-# DEFAULT_FROM_EMAIL = 'Unicorn Forum Dev'
-# EMAIL_USE_TLS = False
-
-#  telnet smtp.xxxx.com.kh 25
-# telnet smtp.yahoo.com 587
