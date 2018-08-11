@@ -101,6 +101,11 @@ Pull in React and prop-types:
 ```sh
 npm i react react-dom prop-types --save-dev
 ```
+Then some other dependencies:
+```sh
+npm install axios --save-dev
+npm install node-sass css-loader sass-loader style-loader --save-dev
+```
 Configure Babel by creating a new file named .babelrc inside the project folder:
 ```sh
 {
@@ -115,18 +120,23 @@ Configure Babel by creating a new file named .babelrc inside the project folder:
 And finally create a new file named webpack.config.js for configuring babel-loader:
 ```sh
 module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader"
+          }
+        },
+        {
+          test:/\.(s*)css$/,
+          use: ['style-loader', 'css-loader', 'sass-loader']
         }
-      }
-    ]
-  }
-};
+      ]
+    },
+    watch:true,
+  };
 ```
 Now, to make webpack watch files for changes, you can run:
 ```sh
