@@ -1,6 +1,5 @@
 from . import models
 
-
 def get_thread(theme):
 
     thread_details = dict()
@@ -62,3 +61,4 @@ def collect_threads_info():
         threads_info.append(thread_details)
 
     return threads_info
+    

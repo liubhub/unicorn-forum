@@ -1,8 +1,17 @@
+# Here and in all other files, is it possible in Python to place all imports in alphabet order?
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+# TODO: Please add comments to all classes,
+# it must describe class designation but not match with a class name.
+
+# TODO: Is it possible to refactor all code in such way,
+# that all lines length will be less than 101 columns.
+
+# TODO: Place all classes definition/declaration in alphabet order.
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -18,12 +27,14 @@ class Profile(models.Model):
     class Meta():
         db_table = 'user_profile'
 
-    # def is_user_confirmed(self):
+    # Why do you comment this code? Maybe it will be better to delete it? See here and below.
+    
+    # def is_user_confirmed(self): 
     #     return self.confirmed
 
 class Category(models.Model):
     id = models.BigAutoField(primary_key=True)
-    category_name = models.CharField(max_length=255, unique=True, null=False,blank=False)
+    category_name = models.CharField(max_length=255, unique=True, null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta():
@@ -75,7 +86,6 @@ class Avatar(models.Model):
     def __str__(self):
         return self.entity
 
-
 class ThreadTheme(models.Model):
     entity = models.OneToOneField(Entity, on_delete=models.CASCADE, primary_key=True)
     category = models.ForeignKey(Category, on_delete=models.deletion.SET_NULL, null=True)
@@ -108,10 +118,11 @@ class CommentMeta(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="main_comment_ref")
     creator = models.ForeignKey(User, on_delete=models.deletion.SET_NULL, related_name="creator_of_comment", null=True)
     answer_to = models.ForeignKey(User, on_delete=models.deletion.SET_NULL, related_name="answer_to_comment", null=True)
-    answer_to_comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="answered_to_comment_ref",null=True)
+    answer_to_comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="answered_to_comment_ref", null=True)
     thread = models.ForeignKey(ThreadTheme, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+
     class Meta():
         db_table = "comment_meta_info"
     
@@ -121,7 +132,7 @@ class CommentMeta(models.Model):
 class LikedEntity(models.Model):
     id = models.BigAutoField(primary_key=True)
     entity = models.ForeignKey(Entity, on_delete=models.CASCADE, unique=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE,unique=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=False)
 
     class Meta():
         db_table = "liked_entity"
@@ -136,17 +147,14 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
-
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-
 
 @receiver(post_save, sender=Profile)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         User.objects.create(user=instance)
-
 
 @receiver(post_save, sender=Profile)
 def save_user_profile(sender, instance, **kwargs):
