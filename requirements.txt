@@ -1,4 +1,4 @@
-Django==2.0
+Django
 django-filter==1.1.0
 django-registration==2.4.1
 django-webpack-loader==0.6.0
