@@ -9,8 +9,13 @@ from django.contrib.auth.models import User
 
 
 from . import models
-from users.views import TokenAuthentication
 from api import serializers
+from users.views import TokenAuthentication
+
+# Here and always, use one style of indentation (one line or two lines).
+
+# It is better to delete old code in comments, if it is not possible, leave a comment
+# and describe in several words why you decided to comment but not delete code.
 
 class ThreadAPI(views.APIView):
     @csrf_exempt
@@ -49,7 +54,8 @@ class ThreadAPI(views.APIView):
 
         return HttpResponse(status=400)
 
-# TODO: Это должно быть не здесь
+# Here and always, write comments in English, please.
+# TODO: Это должно быть не здесь.
 
 class UserAPI(views.APIView):
     def get(self, request, username=None):

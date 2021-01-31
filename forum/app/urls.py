@@ -15,6 +15,7 @@ urlpatterns = [
     path('comment/', views.comment_thread),
     path('like/', views.LikeAPI.as_view()),
 
+    # "TODO:" whant?
     # TODO: 
     path('users/', views.users_template),
 ]
