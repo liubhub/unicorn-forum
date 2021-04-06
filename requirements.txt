@@ -1,6 +1,6 @@
 Django
 django-filter==1.1.0
-django-registration==2.4.1
+django-registration==3.1.2
 django-webpack-loader==0.6.0
 djangorestframework>=3.9.1
 mysqlclient==1.3.12
